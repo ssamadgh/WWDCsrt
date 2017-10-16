@@ -19,11 +19,11 @@
 </p>
 
 # WWDC.srt
-###An app for Download WWDC subtitles
+### An app for Download WWDC subtitles
 
 WWDC.srt allows you to download subtitle for each WWDC session video since 2013 in (**srt**) format.
 
-⬇️ If you just want to download the latest release, go to [this link](./Releases/WWDC.srt.app).
+⬇️ If you just want to download the latest release, go to [this link](./Releases/WWDC.srt.zip).
 
 ## Session
 
