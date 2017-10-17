@@ -46,14 +46,14 @@ In this tab you can paste WWDC video link like:
 
  ` https://devstreaming-cdn.apple.com/videos/tutorials/20170912/201qy4t11tjpm/building_apps_for_iphone_x/building_apps_for_iphone_x_hd.mp4?dl=1 `
  
-  and download it's subtitle.
+  into text field and download it's subtitle.
   
   ![Video Link](./ScreenShots/VideoLink.png)
 
 
 ## Text File
 
-In this tab you can just drag a text file which contains a bunch of your favorite WWDC Videos link into the view and download their subtitles altogether.
+In this tab you can just drag a text file which contains a bunch of your favorite WWDC Video's links into the view and download their subtitles altogether.
 
   ![Text File](./ScreenShots/TextFile.png)
 
