@@ -79,7 +79,7 @@ final class DownloadWebvttOperation: GroupOperation {
     
     ///This method converts webvtt standard content to srt standard content
     func convertWebvttToSrt(webvtt: String) -> String {
-        let timeLinePattern = "([0-9:.]+)\\.(\\d+ --> [0-9:.]+)\\.(\\d+) (\\w+:\\w+)"
+        let timeLinePattern = "([0-9:.]+)\\.(\\d+ --> [0-9:.]+)\\.(\\d+) (\\w+:\\w+)\\%?"
         var firstLines:[String] = []
         var newLines:[String] = []
         var newSrt = webvtt

@@ -44,7 +44,8 @@ func ==(lhs: Webvtt, rhs: Webvtt) -> Bool {
 struct Subtitle: Comparable {
     
     /// This is the pattern we use to verify valid WWDC Video links.
-    private let pattern = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/wwdc\\/)(\\d+)(\\/\\w+\\/)(\\d+)(\\/)(\\w+(?:-)?\\w+)\\.m[op4][v4]\\?dl=1"
+    private let pattern = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/[wdctuiorals]+\\/)(\\d+)(\\/\\w+\\/)(\\w+)(\\/)(\\w+(?:-)?\\w+)\\.m[op4][v4]\\?dl=1"
+
     
     /// A prefix of inputed video url which used for geting m3u8 and webvtt files url
     private let videoURLPrefix: String
@@ -99,12 +100,38 @@ struct Subtitle: Comparable {
             self.videoURLPrefix = regexGroup[1...5].joined()
             self.videoName = regexGroup[6]
             self.wwdcYear = Int(regexGroup[2])!
-            self.sessionNumber = Int(regexGroup[4])!
+            self.sessionNumber = Int(regexGroup[4]) ?? {
+
+                /*
+                 Some video links group 4 of pattern is'nt session number,
+                 so we should get the session number in other ways.
+                 If we failed to get session number in any way so we
+                 return a randomNumber as session number.
+                 - note: this number isn't use anywhere in exported srt file.
+                */
+                func randomNumber() -> Int {
+                    return Int(arc4random_uniform(100))*Int(arc4random_uniform(101))
+                }
+
+                if let group = regexGroup[3].captureGroups(with: "\\/(\\d+)\\w+\\/") {
+                    if let number = Int(group[1]) {
+                        return number
+                    }
+                    else {
+                        return randomNumber()
+                    }
+                }
+                else {
+                    return randomNumber()
+                }
+            }()
+
         }
         else {
             return nil
         }
     }
+    
     
     /// This method gives url for download webvtt file related to given webvtt.
     func url(for webvtt: Webvtt) -> URL {
@@ -160,6 +187,10 @@ struct Subtitle: Comparable {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func getARandomNumber() -> Int {
+        return Int(arc4random_uniform(100))*Int(arc4random_uniform(101))
     }
     
 }
