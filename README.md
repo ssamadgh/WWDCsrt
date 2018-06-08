@@ -36,9 +36,14 @@ WWDC.srt allows you to download subtitle for each WWDC session video since 2013 
 
 ## Session
 
-In this tab you can choose ( or search session number of ) your favorite WWDC Session video from the list and download it's subtitle by clicking get button. Also you can download all sessions subtitle alltogether by choosing (All Sessions) radio button.
+In this tab you can choose ( or search session number of ) your favorite WWDC Session video from the list and download it's subtitle or data links by clicking get button. Also you can download all sessions subtitles or data links alltogether by choosing (All Sessions) radio button.
+Data links are include videos links (HD or SD depending on your choice), pdf links and sample code links.
 
-![Session](./ScreenShots/Session.png)
+![Session](./ScreenShots/Session01.png)
+
+
+![Session](./ScreenShots/Session02.png)
+
 
 ## Video Link
 

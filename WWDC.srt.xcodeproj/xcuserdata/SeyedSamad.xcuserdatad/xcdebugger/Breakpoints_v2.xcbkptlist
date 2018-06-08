@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/FetchWebvttsOperation.swift"
-            timestampString = "529879024.946751"
+            timestampString = "550143256.7030751"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "48"
             endingLineNumber = "48"
-            landmarkName = "init(subtitle:)"
+            landmarkName = "execute()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412846.637724"
+            timestampString = "549886669.59297"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "26"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/ExportSrtFileOperation.swift"
-            timestampString = "529872746.387282"
+            timestampString = "550131177.621106"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412846.640311"
+            timestampString = "549886669.593096"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "56"
@@ -122,12 +122,12 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412846.995505"
+                  timestampString = "550142233.361183"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "56"
                   endingLineNumber = "56"
-                  offsetFromSymbolStart = "291">
+                  offsetFromSymbolStart = "307">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -137,7 +137,7 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412846.998455"
+                  timestampString = "550142233.363104"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "56"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412846.640532"
+            timestampString = "549886669.593147"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412846.640744"
+            timestampString = "549886669.5931931"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "46"
@@ -186,7 +186,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412883.866706"
+            timestampString = "549886669.593242"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
@@ -202,12 +202,12 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412883.872018"
+                  timestampString = "550142233.379631"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
                   endingLineNumber = "57"
-                  offsetFromSymbolStart = "643">
+                  offsetFromSymbolStart = "659">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -217,7 +217,7 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412883.873657"
+                  timestampString = "550142233.38147"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "57"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "534412904.221827"
+            timestampString = "549886669.593281"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
@@ -250,12 +250,12 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412904.227551"
+                  timestampString = "550142233.386668"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "34"
                   endingLineNumber = "34"
-                  offsetFromSymbolStart = "920">
+                  offsetFromSymbolStart = "375">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -265,7 +265,7 @@
                   moduleName = "WWDC.srt"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Volumes/My_Datas/Xcode_Data/Published_Apps_Backup/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/DownloadM3U8Operation.swift"
-                  timestampString = "534412904.229169"
+                  timestampString = "550142233.38832"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -273,6 +273,86 @@
                   offsetFromSymbolStart = "26">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/MainViewController.swift"
+            timestampString = "550143256.703601"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "490"
+            endingLineNumber = "490"
+            landmarkName = "getSubtitleFromSession(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/MainViewController.swift"
+            timestampString = "550143256.703722"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "669"
+            endingLineNumber = "669"
+            landmarkName = "getSubtitlesFromPath(path:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/MainViewController.swift"
+            timestampString = "550143256.703813"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "downloadLinks(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/ExportLinksOperation.swift"
+            timestampString = "550143256.70389"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "execute()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/WWDCVideosController.swift"
+            timestampString = "550143256.7039829"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "getPDFResourceURL(fromHTML:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

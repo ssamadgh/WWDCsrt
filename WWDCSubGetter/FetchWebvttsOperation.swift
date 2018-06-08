@@ -51,7 +51,7 @@ final class FetchWebvttsOperation: GroupOperation {
             addOperation(downloadOperation)
         }
         
-        // We clear subtitle webvtts array, because after downloading webvtts, we fill this array we new webvtts.
+        // We clear subtitle webvtts array, because after downloading webvtts, we fill this array with new webvtts.
         model.clearWebvttArray(of: sub)
         
         super.execute()

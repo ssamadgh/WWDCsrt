@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		E410760F1F91292400A4D4AB /* TextFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E410760E1F91292400A4D4AB /* TextFileView.swift */; };
 		E423320C1F9418E600B0D517 /* SubtitlesProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E423320B1F9418E600B0D517 /* SubtitlesProgress.swift */; };
+		E431A31D20C6C161000844BF /* WWDCVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A31C20C6C161000844BF /* WWDCVideosController.swift */; };
+		E431A32020C7E869000844BF /* GetLinksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A31F20C7E869000844BF /* GetLinksOperation.swift */; };
+		E431A32320C7ECAA000844BF /* GetHtmlSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */; };
+		E431A32520C7FBF0000844BF /* GetHtmlVideoPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */; };
+		E431A32720C7FDA0000844BF /* LinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32620C7FDA0000844BF /* LinksModel.swift */; };
+		E431A32920C80F5E000844BF /* ParseHtmlVideoPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */; };
+		E431A32B20C81AE4000844BF /* ParseSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */; };
+		E431A32D20C87163000844BF /* ExportLinksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32C20C87163000844BF /* ExportLinksOperation.swift */; };
 		E434C8D41F8DF9B900DA9B30 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C8D31F8DF9B900DA9B30 /* MainViewController.swift */; };
 		E434C8EC1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C8EB1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift */; };
 		E434C8ED1F8DFBEB00DA9B30 /* NSLock+Operations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C8D61F8DFAE900DA9B30 /* NSLock+Operations.swift */; };
@@ -48,6 +56,14 @@
 /* Begin PBXFileReference section */
 		E410760E1F91292400A4D4AB /* TextFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFileView.swift; sourceTree = "<group>"; };
 		E423320B1F9418E600B0D517 /* SubtitlesProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesProgress.swift; sourceTree = "<group>"; };
+		E431A31C20C6C161000844BF /* WWDCVideosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCVideosController.swift; sourceTree = "<group>"; };
+		E431A31F20C7E869000844BF /* GetLinksOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLinksOperation.swift; sourceTree = "<group>"; };
+		E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHtmlSessionsListOperation.swift; sourceTree = "<group>"; };
+		E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHtmlVideoPageOperation.swift; sourceTree = "<group>"; };
+		E431A32620C7FDA0000844BF /* LinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksModel.swift; sourceTree = "<group>"; };
+		E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHtmlVideoPageOperation.swift; sourceTree = "<group>"; };
+		E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSessionsListOperation.swift; sourceTree = "<group>"; };
+		E431A32C20C87163000844BF /* ExportLinksOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportLinksOperation.swift; sourceTree = "<group>"; };
 		E434C8D31F8DF9B900DA9B30 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E434C8D61F8DFAE900DA9B30 /* NSLock+Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLock+Operations.swift"; sourceTree = "<group>"; };
 		E434C8D71F8DFAE900DA9B30 /* Foundation.Operation+Operation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Foundation.Operation+Operation.swift"; sourceTree = "<group>"; };
@@ -99,6 +115,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E431A31E20C7E845000844BF /* GetSubtitlesOperations */ = {
+			isa = PBXGroup;
+			children = (
+				E434C9071F8E8FBC00DA9B30 /* ConvertToSubtitleOperation.swift */,
+				E434C8EB1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift */,
+				E434C8FF1F8E156D00DA9B30 /* FetchSubtitilesOperation.swift */,
+				E434C9041F8E3A4700DA9B30 /* DownloadM3U8Operation.swift */,
+				E434C9091F8EB29100DA9B30 /* FetchWebvttsOperation.swift */,
+				E434C90B1F8EB2F900DA9B30 /* DownloadWebvttOperation.swift */,
+				E434C90D1F8ED94400DA9B30 /* ExportSrtFileOperation.swift */,
+			);
+			name = GetSubtitlesOperations;
+			sourceTree = "<group>";
+		};
+		E431A32120C7E872000844BF /* GetLinksOperation */ = {
+			isa = PBXGroup;
+			children = (
+				E431A31F20C7E869000844BF /* GetLinksOperation.swift */,
+				E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */,
+				E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */,
+				E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */,
+				E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */,
+				E431A32C20C87163000844BF /* ExportLinksOperation.swift */,
+			);
+			name = GetLinksOperation;
+			sourceTree = "<group>";
+		};
 		E434C8D51F8DFAE900DA9B30 /* Operations */ = {
 			isa = PBXGroup;
 			children = (
@@ -157,13 +200,8 @@
 		E434C8EA1F8DFAF800DA9B30 /* App Operations */ = {
 			isa = PBXGroup;
 			children = (
-				E434C9071F8E8FBC00DA9B30 /* ConvertToSubtitleOperation.swift */,
-				E434C8EB1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift */,
-				E434C8FF1F8E156D00DA9B30 /* FetchSubtitilesOperation.swift */,
-				E434C9041F8E3A4700DA9B30 /* DownloadM3U8Operation.swift */,
-				E434C9091F8EB29100DA9B30 /* FetchWebvttsOperation.swift */,
-				E434C90B1F8EB2F900DA9B30 /* DownloadWebvttOperation.swift */,
-				E434C90D1F8ED94400DA9B30 /* ExportSrtFileOperation.swift */,
+				E431A31E20C7E845000844BF /* GetSubtitlesOperations */,
+				E431A32120C7E872000844BF /* GetLinksOperation */,
 			);
 			name = "App Operations";
 			sourceTree = "<group>";
@@ -172,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				E4D6DD3D1F6C73C200EE9B83 /* Model.swift */,
+				E431A32620C7FDA0000844BF /* LinksModel.swift */,
 				E48D21A41F94E1A000AB8BBC /* Subtitle.swift */,
 			);
 			name = Model;
@@ -181,6 +220,7 @@
 			isa = PBXGroup;
 			children = (
 				E423320B1F9418E600B0D517 /* SubtitlesProgress.swift */,
+				E431A31C20C6C161000844BF /* WWDCVideosController.swift */,
 				E434C8EA1F8DFAF800DA9B30 /* App Operations */,
 				E434C8D51F8DFAE900DA9B30 /* Operations */,
 			);
@@ -333,6 +373,7 @@
 				E46069021F9599B70009B113 /* Array+Extensions.swift in Sources */,
 				E434C8F51F8DFBEB00DA9B30 /* MutuallyExclusive.swift in Sources */,
 				E434C8FC1F8DFBEB00DA9B30 /* OperationQueue.swift in Sources */,
+				E431A32320C7ECAA000844BF /* GetHtmlSessionsListOperation.swift in Sources */,
 				E48D21A51F94E1A000AB8BBC /* Subtitle.swift in Sources */,
 				E434C8F71F8DFBEB00DA9B30 /* OperationErrors.swift in Sources */,
 				E434C90C1F8EB2F900DA9B30 /* DownloadWebvttOperation.swift in Sources */,
@@ -345,10 +386,17 @@
 				E434C8D41F8DF9B900DA9B30 /* MainViewController.swift in Sources */,
 				E434C9001F8E156D00DA9B30 /* FetchSubtitilesOperation.swift in Sources */,
 				E434C8F31F8DFBEB00DA9B30 /* Operation.swift in Sources */,
+				E431A32720C7FDA0000844BF /* LinksModel.swift in Sources */,
+				E431A31D20C6C161000844BF /* WWDCVideosController.swift in Sources */,
 				E434C9081F8E8FBC00DA9B30 /* ConvertToSubtitleOperation.swift in Sources */,
+				E431A32920C80F5E000844BF /* ParseHtmlVideoPageOperation.swift in Sources */,
+				E431A32020C7E869000844BF /* GetLinksOperation.swift in Sources */,
+				E431A32B20C81AE4000844BF /* ParseSessionsListOperation.swift in Sources */,
 				E434C8FA1F8DFBEB00DA9B30 /* BlockObserver.swift in Sources */,
 				E434C8ED1F8DFBEB00DA9B30 /* NSLock+Operations.swift in Sources */,
 				E410760F1F91292400A4D4AB /* TextFileView.swift in Sources */,
+				E431A32D20C87163000844BF /* ExportLinksOperation.swift in Sources */,
+				E431A32520C7FBF0000844BF /* GetHtmlVideoPageOperation.swift in Sources */,
 				E4D6DD3E1F6C73C200EE9B83 /* Model.swift in Sources */,
 				E434C8F41F8DFBEB00DA9B30 /* ReachabilityCondition.swift in Sources */,
 				E46069031F9599BB0009B113 /* String+Extensions.swift in Sources */,

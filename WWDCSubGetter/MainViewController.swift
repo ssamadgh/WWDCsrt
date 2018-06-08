@@ -8,6 +8,51 @@
 
 import Cocoa
 
+/// An enum for wwdc selection `popUpButton`
+enum WWDC: String {
+	//fall2017
+	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", ofFall2017 = "Fall 2017", of2018 = "2018"
+	
+	var stringValue: String {
+		switch self {
+		case .of2013:
+			return "wwdc2013"
+		case .of2014:
+			return "wwdc2014"
+		case .of2015:
+			return "wwdc2015"
+		case .of2016:
+			return "wwdc2016"
+		case .of2017:
+			return "wwdc2017"
+		case .ofFall2017:
+			return "fall2017"
+		case .of2018:
+			return "wwdc2018"
+		}
+	}
+	
+	var numberValue: Int {
+		switch self {
+		case .of2013:
+			return 2013
+		case .of2014:
+			return 2014
+		case .of2015:
+			return 2015
+		case .of2016:
+			return 2016
+		case .of2017:
+			return 2017
+		case .ofFall2017:
+			return 20173
+		case .of2018:
+			return 2018
+		}
+	}
+	
+}
+
 final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFieldDelegate, NSComboBoxCellDataSource, NSComboBoxDataSource, NSComboBoxDelegate, ProgressView {
     
     // MARK: - Enums
@@ -16,29 +61,29 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     enum TabViewID: String {
         case session, videoLink, textFile
     }
-    
-    /// An enum for wwdc selection `popUpButton`
-    enum WWDC: Int {
-        case of2013 = 2013, of2014, of2015, of2016, of2017, of2018
-    }
-    
+	
     /// An enum for detect which radio button in session tabView is selected. single session or all sessions.
     enum Session: Equatable {
         static func ==(lhs: MainViewController.Session, rhs: MainViewController.Session) -> Bool {
             switch (lhs, rhs) {
             case (.allSessions, .allSessions):
                 return true
-            case let (.singleSession(lSubtitle), .singleSession(rSubtitle)):
-                return lSubtitle == rSubtitle
+            case let (.singleSession(lTitle), .singleSession(rTitle)):
+                return lTitle == rTitle
             default:
                 return false
             }
         }
-        
-        case singleSession(Subtitle)
+		
+//        case singleSession(Subtitle)
+		case singleSession(String)
         case allSessions
     }
-    
+	
+	enum GetState {
+		case subtitle, downloadLinks
+	}
+	    
     // MARK: - Properties
     
     @IBOutlet weak var tabView: NSTabView!
@@ -55,16 +100,36 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     @IBOutlet weak var videoLinkTabViewStatusLabel: NSTextField!
     @IBOutlet weak var getButtonStatusLabel: NSTextField!
 
-    let operationQueue = OperationQueue()
+	@IBOutlet weak var hdSdButtonsHolderBox: NSBox!
+	
+	@IBOutlet weak var getSubtitleRadioButton: NSButton!
+	
+	@IBOutlet weak var getDownloadLinkRadioButton: NSButton!
+	
+	@IBOutlet weak var videoCheckmark: NSButton!
+	
+	@IBOutlet weak var pdfCheckmark: NSButton!
+
+	@IBOutlet weak var sampleCodeCheckmark: NSButton!
+
+	@IBOutlet weak var checkmarksView: NSView!
+	
+	@IBOutlet weak var hdRadioButton: NSButton!
+	
+	@IBOutlet weak var sdRadioButton: NSButton!
+	
+	let operationQueue = OperationQueue()
     
     var draggedTextFileURL: URL?
     var draggedTextFileSubtitles: [Subtitle] = []
     
     var wwdcVideosSubtitlesDic: [WWDC: [Subtitle]] = [:]
-    
+	
+	var sessionsListArray: [String] = []
+	
     /// A computed property whic gets selected wwdc based on `popUpButton` selection
     var selectedWWDC: WWDC {
-        return WWDC(rawValue: Int(self.popUpButton.selectedItem!.title)!)!
+        return WWDC(rawValue: self.popUpButton.selectedItem!.title)!
     }
     
     /// A computed property whic gets a subtitle array based on `selectedWWDC`
@@ -77,7 +142,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     var videoLinkSubtitle: Subtitle?
     
     var session: Session?
-    
+	
+	var getState: GetState = .subtitle
+	
+	var videoQuality: VideoQuality = .hd
+	
     // MARK: - View methods
     
     override func viewDidLoad() {
@@ -97,27 +166,62 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         self.comboBox.delegate = self
         self.comboBox.dataSource = self
         self.comboBox.completes = true
-        
-        
-        self.getSubtitlesForSelectedWWDC()
-        
+
+		let lastWWDC = WWDC.of2018
+		self.getSessionsListForSelecteWWDC(checkForExistingCache: self.selectedWWDC != lastWWDC)
+		
         // Checking if there is `documentDirectory` set it as default destination.
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
-            model.destinationURL = dir
+
+			let destination = dir.appendingPathComponent("\(selectedWWDC.stringValue)")
+            model.destinationURL = destination
             self.destinationTextField.placeholderString = dir.path
         }
         
         self.videoLinkTabViewStatusLabel.stringValue = ""
         self.getButtonStatusLabel.stringValue = ""
         
-//        self.progressIndicator.doubleValue 
+//        self.progressIndicator.doubleValue
+		self.getSubtitleRadioButton.state = .on
+		self.checkmarksView.alphaValue = 0.0
+		self.videoCheckmark.state = .on
+		self.hdSdButtonsHolderBox.alphaValue = 1.0
+		self.hdRadioButton.state = .on
+		
+//		let wwdcYear = self.popUpButton.selectedItem!.title
+//
+//		let getLinksOperation = GetLinksOperation(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf, SessionDataTypes.sampleCode], wwdcYear: wwdcYear, copyToUserDestinationURL: true) {
+//
+//			let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+//			let destinationURL = cachesFolder.appendingPathComponent("\(wwdcYear.stringValue)/", isDirectory: true)
+//			let userDestinationURL = model.destinationURL!
+
+//		NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
+//			print(destinationURL.path)
+//
+//		}
+//		self.operationQueue.addOperation(getLinksOperation)
+		
     }
     
     // MARK: - Session tabView methods
     
     @IBAction func popUpButtonClicked(_ sender: NSPopUpButton) {
-        self.getSubtitlesForSelectedWWDC()
+//        self.getSubtitlesForSelectedWWDC()
+		self.getSessionsListForSelecteWWDC()
+
+		if let path = self.destinationTextField.placeholderString {
+			let url = URL(fileURLWithPath: path)
+			let destination = url.appendingPathComponent("\(selectedWWDC.stringValue)")
+			
+			model.destinationURL = destination
+		}
+		self.session = nil
+		self.comboBox.stringValue = ""
+		self.toggleSession(for: self.session)
+
+
     }
     
     // MARK: Radio buttons methods
@@ -133,21 +237,70 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     }
     
     func toggleSession(for session: Session?) {
+		guard  session != nil else {
+			self.allSessionsButton.state = .off
+			self.singleSessionButton.state = .off
+			return
+		}
         self.allSessionsButton.state = session == .allSessions ? .on : .off
         self.singleSessionButton.state = session == .allSessions ? .off : .on
     }
-    
+	
+	@IBAction func getSubtitleSelected(_ sender: NSButton) {
+		self.getState = .subtitle
+		self.toggleGetState(for: self.getState)
+	}
+	
+	@IBAction func getDownloadLinksSelected(_ sender: NSButton) {
+		self.getState = .downloadLinks
+		self.toggleGetState(for: self.getState)
+	}
+
+	
+	func toggleGetState(for getState: GetState) {
+		self.getSubtitleRadioButton.state = getState == .subtitle ? .on : .off
+		self.getDownloadLinkRadioButton.state = getState == .subtitle ? .off : .on
+		self.getDownloadLinkRadioButton.title = getState == .subtitle ? "Get Download Links" : "Get Download Links for"
+		self.checkmarksView.alphaValue = getState == .subtitle ? 0.0 : 1.0
+		
+	}
+	
+	@IBAction func hdRadioButtonAction(_ sender: NSButton) {
+		self.videoQuality = .hd
+		self.toggleVideoQuality(for: self.videoQuality)
+	}
+	
+	@IBAction func sdRadioButtonAction(_ sender: NSButton) {
+		self.videoQuality = .sd
+		self.toggleVideoQuality(for: self.videoQuality)
+	}
+	
+	func toggleVideoQuality(for quality: VideoQuality) {
+		self.hdRadioButton.state = quality == .hd ? .on : .off
+		self.sdRadioButton.state = quality == .hd ? .off : .on
+	}
+
+
+	
+	//MARK: Chekmark buttons methods
+	
+	@IBAction func videoChekmarkAction(_ sender: NSButton) {
+		self.hdSdButtonsHolderBox.alphaValue = self.videoCheckmark.state == .on ? 1.0 : 0.0
+	}
+	
     // MARK: ComboBox methods
     
     @IBAction func comboBoxselectedAction(_ sender: NSComboBox) {
         print(sender.stringValue)
-        let string = sender.stringValue
-        if !string.isEmpty {
-            let filteredSubtitles = self.selectedWWWDCSubtitles.filter { $0.videoName == string}
-            if !filteredSubtitles.isEmpty {
-                self.session = Session.singleSession(filteredSubtitles.first!)
-                self.toggleSession(for: self.session)
-            }
+        let title = sender.stringValue
+        if !title.isEmpty {
+			
+			let filteredList = self.sessionsListArray.filter { $0 == title }
+			if !filteredList.isEmpty {
+				self.session = Session.singleSession(title)
+				self.toggleSession(for: self.session)
+			}
+
         }
         else {
             self.session = nil
@@ -157,17 +310,24 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     }
     
     func numberOfItems(in comboBox: NSComboBox) -> Int {
-        return self.selectedWWWDCSubtitles.count
+//        return self.selectedWWWDCSubtitles.count
+		return self.sessionsListArray.count
+
     }
     
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-        return self.selectedWWWDCSubtitles[index].videoName
+//        return self.selectedWWWDCSubtitles[index].videoName
+		return self.sessionsListArray[index]
+
     }
     
     func comboBox(_ comboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int {
-        let filteredSubtitles = self.selectedWWWDCSubtitles.filter { $0.videoName == string}
-        
-        return !filteredSubtitles.isEmpty ? self.selectedWWWDCSubtitles.index(of: filteredSubtitles.first!)! : NSNotFound
+//        let filteredSubtitles = self.selectedWWWDCSubtitles.filter { $0.videoName == string}
+//
+//        return !filteredSubtitles.isEmpty ? self.selectedWWWDCSubtitles.index(of: filteredSubtitles.first!)! : NSNotFound
+		
+		let filteredList = self.sessionsListArray.filter { $0 == string }
+		return !filteredList.isEmpty ? self.sessionsListArray.index(of: filteredList.first!)! : NSNotFound
     }
     
     // MARK: - Video Link tabView methods
@@ -259,7 +419,10 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         panel.beginSheetModal(for: window) { (result) in
             if result == NSApplication.ModalResponse.OK {
                 let url = panel.urls[0]
-                model.destinationURL = url
+				
+				let destination = url.appendingPathComponent("\(self.selectedWWDC.stringValue)")
+
+                model.destinationURL = destination
                 self.destinationTextField.placeholderString = url.path
             }
         }
@@ -270,11 +433,38 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     // When user pressing the Get button we check to see which tab is selected and based on it we getting appropriate subtitles.
     
     @IBAction func getSubtitleButtonClicked(_ sender: NSButton) {
-        
+
         switch self.tabView.selectedTabViewItem?.identifier as! String {
         case TabViewID.session.rawValue:
-            self.getSubtitleFromSession()
-            
+			switch self.getState {
+			case .subtitle:
+				self.getSubtitleFromSession(for: selectedWWDC)
+			case .downloadLinks:
+				var types: [SessionDataTypes] = []
+				
+				if self.videoCheckmark.state == .on {
+					if self.hdRadioButton.state == .on {
+						types.append(.video(.hd))
+					}
+					else {
+						types.append(.video(.sd))
+					}
+				}
+				
+				if self.pdfCheckmark.state == .on {
+					types.append(.pdf)
+				}
+				
+				if self.sampleCodeCheckmark.state == .on {
+					types.append(.sampleCode)
+				}
+				
+				
+				self.downloadLinks(for: types)
+				
+				break
+			}
+			
         case TabViewID.videoLink.rawValue:
             self.getSubtitleFromVideoLink()
             
@@ -284,30 +474,211 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
             break
         }
         
-        if !model.isEmpty {
-            self.startGetSubtitleOperation()
-        }
-        else {
-            let error = "Error: No valid video link is imported."
-            self.endDownloadingStatus(withError: error)
-            self.endDownloadingStatus()
-        }
+//        if !model.isEmpty {
+//			self.startGetSubtitleOperation(for: selectedWWDC)
+//        }
+//        else {
+//            let error = "Error: No valid video link is imported."
+//            self.endDownloadingStatus(withError: error)
+//            self.endDownloadingStatus()
+//        }
     }
     
     
-    func getSubtitleFromSession() {
-        if session != nil {
-            model.clear()
-            switch self.session! {
-            case .singleSession(let subtitle):
-                model.update(subtitle)
-                
-            case .allSessions:
-                model.update(self.selectedWWWDCSubtitles)
-            }
-        }
+	func getSubtitleFromSession(for wwdc: WWDC) {
+		
+		if session != nil {
+			model.clear()
+			switch self.session! {
+			case .singleSession(let title):
+				
+				//				let title = "102 _ Platforms State of the Union"
+				
+				let textArray = title.split(separator: " ")
+				let sessionNumber = String(textArray.first!)
+				let hdVideoURL = linksModel.hdVideoCacheURLFor(wwdc)
+				
+				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
+					
+					let data = try! String(contentsOfFile:hdVideoURL.path, encoding: String.Encoding.utf8)
+					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(sessionNumber) }
+					if let videoLink = hdVideoLinksArray.first {
+						if let subtitle = Subtitle(videoURL: videoLink) {
+							model.update(subtitle)
+						}
+					}
+					
+				}
+				
+				if !model.isEmpty {
+					self.startGetSubtitleOperation(for: selectedWWDC)
+				}
+				else {
+					let error = "Error: No valid video link is imported."
+					self.endDownloadingStatus(withError: error)
+					self.endDownloadingStatus()
+				}
+
+			case .allSessions:
+				
+				let hdVideoURL = linksModel.hdVideoCacheURLFor(wwdc)
+				
+				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
+
+					let convertToSubtitleOperation = ConvertToSubtitleOperation(from: hdVideoURL.path, type: .textFile) { (subtitles) in
+						
+						DispatchQueue.main.async {
+							model.update(subtitles)
+
+							if !model.isEmpty {
+								self.startGetSubtitleOperation(for: self.selectedWWDC)
+							}
+							else {
+								let error = "Error: No valid video link is imported."
+								self.endDownloadingStatus(withError: error)
+								self.endDownloadingStatus()
+							}
+
+						}
+						
+
+					}
+
+					self.operationQueue.addOperation(convertToSubtitleOperation)
+					
+				}
+
+			}
+		}
+		else {
+			let error = "Error: No valid video link is imported."
+			self.endDownloadingStatus(withError: error)
+			self.endDownloadingStatus()
+		}
+		
+
     }
-    
+	
+	func downloadLinks(for types: [SessionDataTypes]) {
+		
+		if session != nil {
+			switch self.session! {
+			case .singleSession(let title):
+				
+				let textArray = title.split(separator: " ")
+				let sessionNumber = String(textArray.first!)
+				
+				self.getLinks(for: types, wwdcYear: self.selectedWWDC, sessionNumber: sessionNumber, copyToUserDestinationURL: true) {
+					
+					let userDestinationURL = model.destinationURL!
+					
+					NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: userDestinationURL.path)
+					
+				}
+
+				break
+			case .allSessions:
+				
+				var selectedTypes = Set(types)
+
+				let fileManager = FileManager.default
+
+				do {
+					
+					for type in selectedTypes {
+						switch type {
+						case let .video(quality):
+							let userHdVideoLinksURL = linksModel.userHdVideoLinksURLFor(selectedWWDC)
+							let userSdVideoLinksURL = linksModel.userSdVideoLinksURLFor(selectedWWDC)
+
+							let userVideoLinksURL = quality == .hd ? userHdVideoLinksURL : userSdVideoLinksURL
+							let videoCacheURL = quality == .hd ? linksModel.hdVideoCacheURLFor(self.selectedWWDC) : linksModel.sdVideoCacheURLFor(self.selectedWWDC)
+							
+							if fileManager.fileExists(atPath: videoCacheURL.path) {
+								if fileManager.fileExists(atPath: userVideoLinksURL.path) {
+									try fileManager.removeItem(at: userVideoLinksURL)
+								}
+								try fileManager.copyItem(at: videoCacheURL, to: userVideoLinksURL)
+								selectedTypes.remove(type)
+							}
+							
+						case .pdf:
+							let userPdfLinksURL = linksModel.userPdfLinksURLFor(selectedWWDC)
+							let pdfLinksCacheURL = linksModel.pdfLinksCacheURLFor(self.selectedWWDC)
+							if fileManager.fileExists(atPath: pdfLinksCacheURL.path) {
+								if fileManager.fileExists(atPath: userPdfLinksURL.path) {
+									try fileManager.removeItem(at: userPdfLinksURL)
+								}
+								try fileManager.copyItem(at: pdfLinksCacheURL, to: userPdfLinksURL)
+								selectedTypes.remove(type)
+							}
+							
+						case .sampleCode:
+							
+							let userSampleCodesLinksURL = linksModel.userSampleCodesLinksURLFor(selectedWWDC)
+							let sampleCodesLinksCacheURL = linksModel.sampleCodesLinksCacheURLFor(selectedWWDC)
+							
+							if fileManager.fileExists(atPath: sampleCodesLinksCacheURL.path) {
+								if fileManager.fileExists(atPath: userSampleCodesLinksURL.path) {
+									try fileManager.removeItem(at: userSampleCodesLinksURL)
+								}
+								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
+									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
+								}
+								
+								try fileManager.copyItem(at: sampleCodesLinksCacheURL, to: userSampleCodesLinksURL)
+								selectedTypes.remove(type)
+							}
+							
+						}
+					}
+					
+				}
+				catch {
+					print(error)
+				}
+				
+				guard !selectedTypes.isEmpty else {
+					let userDestinationURL = model.destinationURL!
+					
+					NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: userDestinationURL.path)
+
+					return
+				}
+				
+				self.getLinks(for: Array(selectedTypes), wwdcYear: self.selectedWWDC, copyToUserDestinationURL: true) {
+					
+					let userDestinationURL = model.destinationURL!
+					
+					NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: userDestinationURL.path)
+
+				}
+				
+				break
+				
+			}
+		}
+		else {
+			let error = "Error: No valid video link is imported."
+			self.endDownloadingStatus(withError: error)
+			self.endDownloadingStatus()
+		}
+	}
+	
+	func getSubtitlesFromPath(path: String) -> [Subtitle] {
+		var subtitles: [Subtitle] = []
+		let semaphore = DispatchSemaphore.init(value: 0)
+		let convertToSubtitleOperation = ConvertToSubtitleOperation(from: path, type: .textFile) { (subs) in
+			subtitles = subs
+//			model.update(subtitles)
+			semaphore.signal()
+		}
+		
+		self.operationQueue.addOperation(convertToSubtitleOperation)
+		semaphore.wait()
+		return subtitles
+	}
+	
     func getSubtitleFromVideoLink() {
         guard let subtitle = self.videoLinkSubtitle else {return }
         model.clear()
@@ -321,7 +692,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         model.update(subtitles)
     }
     
-    func startGetSubtitleOperation() {
+    func startGetSubtitleOperation(for wwdc: WWDC) {
         self.getButton.isEnabled = false
         self.getButtonStatusLabel.textColor = .black
         self.getButtonStatusLabel.stringValue = "downloading Subtitles 0 of \(model.allSubtitles().count)"
@@ -336,6 +707,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 
         let operation = GetSubtitlesOperation {
             self.endDownloadingStatus()
+			
+			let userDestinationURL = model.destinationURL!
+			
+			NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: userDestinationURL.path)
+
         }
         self.operationQueue.addOperation(operation)
     }
@@ -359,10 +735,9 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     
     
     /// This method gets subtitle array based on popUp button selection and caches it in `wwdcVideosSubtitlesDic`.
-    
     func getSubtitlesForSelectedWWDC() {
         let selectedYear = self.popUpButton.selectedItem!.title
-        let selectedWWDC = WWDC(rawValue: Int(selectedYear)!)!
+        let selectedWWDC = WWDC(rawValue: selectedYear)!
         
         guard self.wwdcVideosSubtitlesDic[selectedWWDC] == nil else {
             self.comboBox.reloadData()
@@ -370,7 +745,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         }
         
         let fileName = "WWDC\(selectedYear)_links"
-        let path = Bundle.main.path(forResource: fileName, ofType: "txt")!
+		guard let path = Bundle.main.path(forResource: fileName, ofType: "txt") else { return }
         
         let convertToSubtitleOperation = ConvertToSubtitleOperation(from: path, type: .textFile) { (subtitles) in
             self.wwdcVideosSubtitlesDic[selectedWWDC] = subtitles
@@ -381,12 +756,83 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         }
         self.operationQueue.addOperation(convertToSubtitleOperation)
     }
-    
+	
+	
+	func getSessionsListForSelecteWWDC(checkForExistingCache: Bool = true) {
+		let wwdcYear = self.popUpButton.selectedItem!.title
+		let selectedWWDC = WWDC(rawValue: wwdcYear)!
+		
+		let titleURL = linksModel.titlesCacheURLFor(selectedWWDC)
+		
+		if FileManager.default.fileExists(atPath: titleURL.path), checkForExistingCache {
+			
+			DispatchQueue.global().async {
+				let data = try! String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
+				let sessionsListArray = data.components(separatedBy: "\n")
+				self.sessionsListArray = sessionsListArray
+				DispatchQueue.main.async {
+					self.comboBox.reloadData()
+				}
+
+			}
+
+		}
+		else {
+			
+			self.getLinks(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf, SessionDataTypes.sampleCode], wwdcYear: selectedWWDC, copyToUserDestinationURL: false) {
+				let titleURL = linksModel.titlesCacheURLFor(selectedWWDC)
+				
+				var sessionsListArray: [String] = []
+				if FileManager.default.fileExists(atPath: titleURL.path) {
+					let data = try! String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
+					sessionsListArray = data.components(separatedBy: "\n")
+				}
+				
+				self.sessionsListArray = sessionsListArray
+
+				DispatchQueue.main.async {
+					self.comboBox.reloadData()
+				}
+			}
+		}
+	}
+	
+	func getLinks(for types: [SessionDataTypes], wwdcYear: WWDC, sessionNumber: String? = nil, copyToUserDestinationURL: Bool, completionHandler: @escaping () -> Void) {
+		
+		self.getButton.isEnabled = false
+		self.comboBox.isEnabled = false
+		self.popUpButton.isEnabled = false
+		self.circularIndicator.startAnimation(nil)
+		
+		let getLinksOperation = GetLinksOperation(for: types, wwdcYear: wwdcYear, sessionNumber: sessionNumber, copyToUserDestinationURL: copyToUserDestinationURL) {
+			
+			DispatchQueue.main.async {
+				self.getButton.isEnabled = true
+				self.comboBox.isEnabled = true
+				self.popUpButton.isEnabled = true
+				self.circularIndicator.stopAnimation(nil)
+				completionHandler()
+			}
+			
+			
+			//				let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+			//				let destinationURL = cachesFolder.appendingPathComponent("\(wwdcYear.stringValue)/", isDirectory: true)
+			//				let userDestinationURL = model.destinationURL!
+			//
+			//				NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
+			//				print(destinationURL.path)
+			
+		}
+		self.operationQueue.addOperation(getLinksOperation)
+
+	}
+	
     // MARK: ProgressView protocol method
     
     func progressChanged(to value: Double) {
         DispatchQueue.main.async {
             self.progressIndicator.doubleValue = value
+			
             self.getButtonStatusLabel.stringValue = "downloading Subtitles \(Int(value)) of \(model.allSubtitles().count)"
 
         }
