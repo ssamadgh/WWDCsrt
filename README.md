@@ -27,6 +27,9 @@
 ### Whats New: 
 
 **version 1.5.0:**
+
+- Now supports WWDC 2018 video's links
+
 	
 - Now you can get links of videos, pdfs and sample codes for each session you want and even for all sessions at once!
 
