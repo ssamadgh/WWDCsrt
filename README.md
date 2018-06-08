@@ -25,9 +25,19 @@
 #### An app for Download WWDC subtitles
 
 ### Whats New: 
+
+**version 1.5.0:**
+	
+- Now you can get links of videos, pdfs and sample codes for each session you want and even for all sessions at once!
+
+- Now the app opens the destination address of your desired data in finder, after downloading them.
+
+- Some minor bugs fixed
+
+
 **version 1.0.1:**
 	
-Now supports Fall 2017 video's links
+- Now supports Fall 2017 video's links
 
 ## Intro
 WWDC.srt allows you to download subtitle for each WWDC session video since 2013 in (**srt**) format.

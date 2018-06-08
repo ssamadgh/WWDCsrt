@@ -51,7 +51,7 @@ class OperationQueue: Foundation.OperationQueue {
             op.addObserver(delegate)
             
             // Extract any dependencies needed by this operation.
-            let dependencies = op.conditions.flatMap {
+            let dependencies = op.conditions.compactMap {
                 $0.dependencyForOperation(op)
             }
             
@@ -65,7 +65,7 @@ class OperationQueue: Foundation.OperationQueue {
              With condition dependencies added, we can now see if this needs
              dependencies to enforce mutual exclusivity.
              */
-            let concurrencyCategories: [String] = op.conditions.flatMap { condition in
+            let concurrencyCategories: [String] = op.conditions.compactMap { condition in
                 if !type(of: condition).isMutuallyExclusive { return nil }
                 
                 return "\(type(of: condition))"

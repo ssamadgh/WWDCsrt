@@ -25,10 +25,7 @@ final class ExportLinksOperation: Operation {
 	
 	
 	override func execute() {
-		
-		let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-		let destinationURL = cachesFolder.appendingPathComponent("com.samad.WWDC.srt/\(wwdcYear.stringValue)/", isDirectory: true)
-		
+				
 		let fileManager = FileManager.default
 		
 		//userDestinationURL

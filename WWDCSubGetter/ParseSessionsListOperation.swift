@@ -33,9 +33,7 @@ class ParseSessionsListOperation: GroupOperation {
 		
 		let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 		let downloadLinksCacheFolder = cachesFolder.appendingPathComponent("com.samad.WWDC.srt/\(wwdcYear.stringValue)/", isDirectory: true)
-		
-		let fileManager = FileManager.default
-		
+				
 		var operations: [Foundation.Operation] = []
 		
 		do {
