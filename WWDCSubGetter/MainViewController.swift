@@ -598,6 +598,10 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 								if fileManager.fileExists(atPath: userVideoLinksURL.path) {
 									try fileManager.removeItem(at: userVideoLinksURL)
 								}
+								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
+									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
+								}
+
 								try fileManager.copyItem(at: videoCacheURL, to: userVideoLinksURL)
 								selectedTypes.remove(type)
 							}
@@ -609,6 +613,10 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 								if fileManager.fileExists(atPath: userPdfLinksURL.path) {
 									try fileManager.removeItem(at: userPdfLinksURL)
 								}
+								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
+									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
+								}
+
 								try fileManager.copyItem(at: pdfLinksCacheURL, to: userPdfLinksURL)
 								selectedTypes.remove(type)
 							}
