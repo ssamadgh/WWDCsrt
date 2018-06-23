@@ -39,7 +39,8 @@ class ParseHtmlVideoPageOperation: Operation {
 			
 			let htmlText = String.init(data: data, encoding:
 				.ascii)!
-			let videoURLString = WWDCVideosController.getHDorSDdURLs(fromHTML: htmlText, format: .hd)
+			let quality: VideoQuality = self.types.contains(SessionDataTypes.video(.sd)) ? .sd : .hd
+			let videoURLString = WWDCVideosController.getHDorSDdURLs(fromHTML: htmlText, format: quality)
 
 			if !videoURLString.isEmpty {
 				
@@ -50,7 +51,6 @@ class ParseHtmlVideoPageOperation: Operation {
 					
 					switch type {
 					case let .video(quality):
-						let videoURLString = WWDCVideosController.getHDorSDdURLs(fromHTML: htmlText, format: quality)
 						
 						if quality == .hd {
 							linksModel.hdVideosLinks.append(videoURLString)
@@ -83,9 +83,8 @@ class ParseHtmlVideoPageOperation: Operation {
 		}
 		catch {
 			print(error.localizedDescription)
-			finish(error as! [NSError])
+			finish([error] as [NSError])
 		}
-		
 		
 	}
 

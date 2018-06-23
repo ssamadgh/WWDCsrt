@@ -9,6 +9,9 @@
 import Cocoa
 
 /// An enum for wwdc selection `popUpButton`
+
+let lastWWDC = WWDC.of2018
+
 enum WWDC: String {
 	//fall2017
 	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", ofFall2017 = "Fall 2017", of2018 = "2018"
@@ -167,7 +170,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         self.comboBox.dataSource = self
         self.comboBox.completes = true
 
-		let lastWWDC = WWDC.of2018
 		self.getSessionsListForSelecteWWDC(checkForExistingCache: self.selectedWWDC != lastWWDC)
 		
         // Checking if there is `documentDirectory` set it as default destination.
@@ -787,7 +789,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		}
 		else {
 			
-			self.getLinks(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf, SessionDataTypes.sampleCode], wwdcYear: selectedWWDC, copyToUserDestinationURL: false) {
+			self.getLinks(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf], wwdcYear: selectedWWDC, copyToUserDestinationURL: false) {
 				let titleURL = linksModel.titlesCacheURLFor(selectedWWDC)
 				
 				var sessionsListArray: [String] = []

@@ -27,10 +27,10 @@ class ParseSessionsListOperation: GroupOperation {
 		
 		super.init(operations: [])
 		self.name = "ParseSessionsListOperation"
+		self.limitMaxConcurrentOperations(to: 3)
 	}
 	
 	override func execute() {
-		
 		let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 		let downloadLinksCacheFolder = cachesFolder.appendingPathComponent("com.samad.WWDC.srt/\(wwdcYear.stringValue)/", isDirectory: true)
 				
@@ -58,12 +58,24 @@ class ParseSessionsListOperation: GroupOperation {
 				
 				let htmlURL = downloadLinksCacheFolder.appendingPathComponent("\(sessionNumber).html")
 				
-				let getHtmlOperation = GetHtmlVideoPageOperation(wwdcYear: wwdcYear, sessionNumber: sessionNumber, cacheFile: htmlURL)
-				operations.append(getHtmlOperation)
-
 				let parseHtmlOperation = ParseHtmlVideoPageOperation(for: types, sessionNumber: sessionNumber, cacheFile: htmlURL)
 				
-				parseHtmlOperation.addDependency(getHtmlOperation)
+				if self.wwdcYear == lastWWDC {
+					let getHtmlOperation = GetHtmlVideoPageOperation(wwdcYear: wwdcYear, sessionNumber: sessionNumber, cacheFile: htmlURL)
+					operations.append(getHtmlOperation)
+					
+					
+					parseHtmlOperation.addDependency(getHtmlOperation)
+				}
+				else if !FileManager.default.fileExists(atPath: htmlURL.path) {
+					
+					let getHtmlOperation = GetHtmlVideoPageOperation(wwdcYear: wwdcYear, sessionNumber: sessionNumber, cacheFile: htmlURL)
+					operations.append(getHtmlOperation)
+					
+					
+					parseHtmlOperation.addDependency(getHtmlOperation)
+				}
+				
 				operations.append(parseHtmlOperation)
 			}
 			
