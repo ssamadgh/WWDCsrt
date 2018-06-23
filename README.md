@@ -26,7 +26,7 @@
 
 ### Whats New: 
 
-**version 1.5.0:**
+**version 1.5.1:**
 
 - Now supports WWDC 2018 video's links
 
