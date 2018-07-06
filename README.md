@@ -1,7 +1,7 @@
   ![icon](./WWDCSubGetter/Assets.xcassets/AppIcon.appiconset/Icon_256x256.png)
 
 <p align="center">
-    <a href="https://developer.apple.com/swift/" target="_blank">
+    <a href="https://github.com/ssamadgh/WWDCsrt/releases/download/v1.5.2/WWDC.srt.zip" target="_blank">
 	    <img src="https://img.shields.io/badge/Version-1.5.2-brightgreen.svg?style=flat" alt="app version 1.5.2">
     </a>
     <a href="https://developer.apple.com/swift/" target="_blank">
