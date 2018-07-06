@@ -26,6 +26,10 @@
 
 ### Whats New: 
 
+**version 1.5.2:**
+
+- Fixed  an issue that downloads wrong subtitle for selected session in some cases
+
 **version 1.5.1:**
 
 - Now supports WWDC 2018 video's links

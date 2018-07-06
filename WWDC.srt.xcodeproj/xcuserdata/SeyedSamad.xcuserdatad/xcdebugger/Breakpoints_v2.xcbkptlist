@@ -282,7 +282,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "551488201.255013"
+            timestampString = "552547545.833598"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "492"
@@ -298,11 +298,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "551488201.255052"
+            timestampString = "552547545.833994"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "679"
-            endingLineNumber = "679"
+            startingLineNumber = "686"
+            endingLineNumber = "686"
             landmarkName = "getSubtitlesFromPath(path:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -314,11 +314,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "551488201.255088"
+            timestampString = "552547545.83426"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "651"
-            endingLineNumber = "651"
+            startingLineNumber = "658"
+            endingLineNumber = "658"
             landmarkName = "downloadLinks(for:)"
             landmarkType = "7">
          </BreakpointContent>

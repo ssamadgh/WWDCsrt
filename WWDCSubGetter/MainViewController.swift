@@ -503,7 +503,14 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
 					
 					let data = try! String(contentsOfFile:hdVideoURL.path, encoding: String.Encoding.utf8)
-					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(sessionNumber) }
+					var searchString = ""
+					if wwdc == .ofFall2017 {
+						searchString = "/\(sessionNumber)"
+					}
+					else {
+						searchString = "/\(sessionNumber)/\(sessionNumber)"
+					}
+					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(searchString) }
 					if let videoLink = hdVideoLinksArray.first {
 						if let subtitle = Subtitle(videoURL: videoLink) {
 							model.update(subtitle)
