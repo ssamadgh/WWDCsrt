@@ -195,11 +195,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 //
 //		let getLinksOperation = GetLinksOperation(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf, SessionDataTypes.sampleCode], wwdcYear: wwdcYear, copyToUserDestinationURL: true) {
 //
-//			let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+			let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
 //			let destinationURL = cachesFolder.appendingPathComponent("\(wwdcYear.stringValue)/", isDirectory: true)
 //			let userDestinationURL = model.destinationURL!
 
-//		NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
+		NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
 //			print(destinationURL.path)
 //
 //		}
