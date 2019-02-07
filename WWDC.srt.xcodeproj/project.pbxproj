@@ -8,14 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		E410760F1F91292400A4D4AB /* TextFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E410760E1F91292400A4D4AB /* TextFileView.swift */; };
+		E4173DC121FC00A400715013 /* GetSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4173DC021FC00A400715013 /* GetSessionsListOperation.swift */; };
+		E4173DC321FC016900715013 /* ParseSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4173DC221FC016900715013 /* ParseSessionsListOperation.swift */; };
 		E423320C1F9418E600B0D517 /* SubtitlesProgress.swift in Sources */ = {isa = PBXBuildFile; fileRef = E423320B1F9418E600B0D517 /* SubtitlesProgress.swift */; };
 		E431A31D20C6C161000844BF /* WWDCVideosController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A31C20C6C161000844BF /* WWDCVideosController.swift */; };
 		E431A32020C7E869000844BF /* GetLinksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A31F20C7E869000844BF /* GetLinksOperation.swift */; };
 		E431A32320C7ECAA000844BF /* GetHtmlSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */; };
-		E431A32520C7FBF0000844BF /* GetHtmlVideoPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */; };
+		E431A32520C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32420C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift */; };
 		E431A32720C7FDA0000844BF /* LinksModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32620C7FDA0000844BF /* LinksModel.swift */; };
 		E431A32920C80F5E000844BF /* ParseHtmlVideoPageOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */; };
-		E431A32B20C81AE4000844BF /* ParseSessionsListOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */; };
+		E431A32B20C81AE4000844BF /* FetchHtmlVideoPagesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32A20C81AE4000844BF /* FetchHtmlVideoPagesOperation.swift */; };
 		E431A32D20C87163000844BF /* ExportLinksOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E431A32C20C87163000844BF /* ExportLinksOperation.swift */; };
 		E434C8D41F8DF9B900DA9B30 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C8D31F8DF9B900DA9B30 /* MainViewController.swift */; };
 		E434C8EC1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C8EB1F8DFB1F00DA9B30 /* GetSubtitlesOperation.swift */; };
@@ -41,7 +43,11 @@
 		E434C90E1F8ED94400DA9B30 /* ExportSrtFileOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E434C90D1F8ED94400DA9B30 /* ExportSrtFileOperation.swift */; };
 		E46069021F9599B70009B113 /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46069011F9599B40009B113 /* Array+Extensions.swift */; };
 		E46069031F9599BB0009B113 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46069001F9599B40009B113 /* String+Extensions.swift */; };
+		E4858EC321F78B8F006EC937 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4858EC221F78B8F006EC937 /* Presenter.swift */; };
 		E48D21A51F94E1A000AB8BBC /* Subtitle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E48D21A41F94E1A000AB8BBC /* Subtitle.swift */; };
+		E4CDBE59220BF3F800CE6A9C /* WWDC_srtTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4CDBE58220BF3F800CE6A9C /* WWDC_srtTests.swift */; };
+		E4CDBE8D220C005E00CE6A9C /* 708.html in Resources */ = {isa = PBXBuildFile; fileRef = E4CDBE8C220C005E00CE6A9C /* 708.html */; };
+		E4CDBE8F220C0FF800CE6A9C /* 505.html in Resources */ = {isa = PBXBuildFile; fileRef = E4CDBE8E220C0FF800CE6A9C /* 505.html */; };
 		E4D6DD3E1F6C73C200EE9B83 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D6DD3D1F6C73C200EE9B83 /* Model.swift */; };
 		E4E45BBF1F93662400FE62CD /* WWDC2016_links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4E45BBA1F93661C00FE62CD /* WWDC2016_links.txt */; };
 		E4E45BC01F93662400FE62CD /* WWDC2017_links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4E45BBB1F93661C00FE62CD /* WWDC2017_links.txt */; };
@@ -53,16 +59,28 @@
 		E4F327CF1F406EA80018B524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F327CD1F406EA80018B524 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E4CDBE5B220BF3F800CE6A9C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E4F327BC1F406EA80018B524 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E4F327C31F406EA80018B524;
+			remoteInfo = WWDC.srt;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		E410760E1F91292400A4D4AB /* TextFileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFileView.swift; sourceTree = "<group>"; };
+		E4173DC021FC00A400715013 /* GetSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSessionsListOperation.swift; sourceTree = "<group>"; };
+		E4173DC221FC016900715013 /* ParseSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSessionsListOperation.swift; sourceTree = "<group>"; };
 		E423320B1F9418E600B0D517 /* SubtitlesProgress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubtitlesProgress.swift; sourceTree = "<group>"; };
 		E431A31C20C6C161000844BF /* WWDCVideosController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCVideosController.swift; sourceTree = "<group>"; };
 		E431A31F20C7E869000844BF /* GetLinksOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetLinksOperation.swift; sourceTree = "<group>"; };
 		E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHtmlSessionsListOperation.swift; sourceTree = "<group>"; };
-		E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetHtmlVideoPageOperation.swift; sourceTree = "<group>"; };
+		E431A32420C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadHtmlVideoPageOperation.swift; sourceTree = "<group>"; };
 		E431A32620C7FDA0000844BF /* LinksModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinksModel.swift; sourceTree = "<group>"; };
 		E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseHtmlVideoPageOperation.swift; sourceTree = "<group>"; };
-		E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseSessionsListOperation.swift; sourceTree = "<group>"; };
+		E431A32A20C81AE4000844BF /* FetchHtmlVideoPagesOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchHtmlVideoPagesOperation.swift; sourceTree = "<group>"; };
 		E431A32C20C87163000844BF /* ExportLinksOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportLinksOperation.swift; sourceTree = "<group>"; };
 		E434C8D31F8DF9B900DA9B30 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E434C8D61F8DFAE900DA9B30 /* NSLock+Operations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSLock+Operations.swift"; sourceTree = "<group>"; };
@@ -90,7 +108,13 @@
 		E434C90D1F8ED94400DA9B30 /* ExportSrtFileOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportSrtFileOperation.swift; sourceTree = "<group>"; };
 		E46069001F9599B40009B113 /* String+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extensions.swift"; sourceTree = "<group>"; };
 		E46069011F9599B40009B113 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
+		E4858EC221F78B8F006EC937 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		E48D21A41F94E1A000AB8BBC /* Subtitle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subtitle.swift; sourceTree = "<group>"; };
+		E4CDBE56220BF3F800CE6A9C /* WWDC.srtTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WWDC.srtTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E4CDBE58220BF3F800CE6A9C /* WWDC_srtTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC_srtTests.swift; sourceTree = "<group>"; };
+		E4CDBE5A220BF3F800CE6A9C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E4CDBE8C220C005E00CE6A9C /* 708.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 708.html; sourceTree = "<group>"; };
+		E4CDBE8E220C0FF800CE6A9C /* 505.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = 505.html; sourceTree = "<group>"; };
 		E4D6DD3D1F6C73C200EE9B83 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		E4E45BBA1F93661C00FE62CD /* WWDC2016_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDC2016_links.txt; sourceTree = "<group>"; };
 		E4E45BBB1F93661C00FE62CD /* WWDC2017_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDC2017_links.txt; sourceTree = "<group>"; };
@@ -105,6 +129,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E4CDBE53220BF3F800CE6A9C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4F327C11F406EA80018B524 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +146,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E4173DC421FC0CBB00715013 /* GetSessionsListOperation */ = {
+			isa = PBXGroup;
+			children = (
+				E4173DC021FC00A400715013 /* GetSessionsListOperation.swift */,
+				E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */,
+				E4173DC221FC016900715013 /* ParseSessionsListOperation.swift */,
+			);
+			name = GetSessionsListOperation;
+			sourceTree = "<group>";
+		};
 		E431A31E20C7E845000844BF /* GetSubtitlesOperations */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,9 +174,8 @@
 			isa = PBXGroup;
 			children = (
 				E431A31F20C7E869000844BF /* GetLinksOperation.swift */,
-				E431A32220C7ECAA000844BF /* GetHtmlSessionsListOperation.swift */,
-				E431A32A20C81AE4000844BF /* ParseSessionsListOperation.swift */,
-				E431A32420C7FBF0000844BF /* GetHtmlVideoPageOperation.swift */,
+				E431A32A20C81AE4000844BF /* FetchHtmlVideoPagesOperation.swift */,
+				E431A32420C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift */,
 				E431A32820C80F5E000844BF /* ParseHtmlVideoPageOperation.swift */,
 				E431A32C20C87163000844BF /* ExportLinksOperation.swift */,
 			);
@@ -200,10 +240,30 @@
 		E434C8EA1F8DFAF800DA9B30 /* App Operations */ = {
 			isa = PBXGroup;
 			children = (
+				E4173DC421FC0CBB00715013 /* GetSessionsListOperation */,
 				E431A31E20C7E845000844BF /* GetSubtitlesOperations */,
 				E431A32120C7E872000844BF /* GetLinksOperation */,
 			);
 			name = "App Operations";
+			sourceTree = "<group>";
+		};
+		E4858EC121F78B7D006EC937 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				E4858EC221F78B8F006EC937 /* Presenter.swift */,
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		E4CDBE57220BF3F800CE6A9C /* WWDC.srtTests */ = {
+			isa = PBXGroup;
+			children = (
+				E4CDBE8C220C005E00CE6A9C /* 708.html */,
+				E4CDBE8E220C0FF800CE6A9C /* 505.html */,
+				E4CDBE58220BF3F800CE6A9C /* WWDC_srtTests.swift */,
+				E4CDBE5A220BF3F800CE6A9C /* Info.plist */,
+			);
+			path = WWDC.srtTests;
 			sourceTree = "<group>";
 		};
 		E4D6DD3C1F6C73AF00EE9B83 /* Model */ = {
@@ -254,6 +314,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F327C61F406EA80018B524 /* WWDCSubGetter */,
+				E4CDBE57220BF3F800CE6A9C /* WWDC.srtTests */,
 				E4F327C51F406EA80018B524 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -262,6 +323,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F327C41F406EA80018B524 /* WWDC.srt.app */,
+				E4CDBE56220BF3F800CE6A9C /* WWDC.srtTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -270,6 +332,7 @@
 			isa = PBXGroup;
 			children = (
 				E4F327C71F406EA80018B524 /* AppDelegate.swift */,
+				E4858EC121F78B7D006EC937 /* Presenter */,
 				E4D6DD3C1F6C73AF00EE9B83 /* Model */,
 				E4E45BAF1F935ED600FE62CD /* Views */,
 				E4E45BAE1F935E7A00FE62CD /* Controllers */,
@@ -292,6 +355,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		E4CDBE55220BF3F800CE6A9C /* WWDC.srtTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E4CDBE5F220BF3F800CE6A9C /* Build configuration list for PBXNativeTarget "WWDC.srtTests" */;
+			buildPhases = (
+				E4CDBE52220BF3F800CE6A9C /* Sources */,
+				E4CDBE53220BF3F800CE6A9C /* Frameworks */,
+				E4CDBE54220BF3F800CE6A9C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E4CDBE5C220BF3F800CE6A9C /* PBXTargetDependency */,
+			);
+			name = WWDC.srtTests;
+			productName = WWDC.srtTests;
+			productReference = E4CDBE56220BF3F800CE6A9C /* WWDC.srtTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		E4F327C31F406EA80018B524 /* WWDC.srt */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E4F327E91F406EA80018B524 /* Build configuration list for PBXNativeTarget "WWDC.srt" */;
@@ -315,10 +396,16 @@
 		E4F327BC1F406EA80018B524 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Seyed Samad Gholamzadeh";
 				TargetAttributes = {
+					E4CDBE55220BF3F800CE6A9C = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 2T492Q3SC8;
+						ProvisioningStyle = Automatic;
+						TestTargetID = E4F327C31F406EA80018B524;
+					};
 					E4F327C31F406EA80018B524 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2T492Q3SC8;
@@ -341,11 +428,21 @@
 			projectRoot = "";
 			targets = (
 				E4F327C31F406EA80018B524 /* WWDC.srt */,
+				E4CDBE55220BF3F800CE6A9C /* WWDC.srtTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E4CDBE54220BF3F800CE6A9C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4CDBE8D220C005E00CE6A9C /* 708.html in Resources */,
+				E4CDBE8F220C0FF800CE6A9C /* 505.html in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4F327C21F406EA80018B524 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -363,6 +460,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E4CDBE52220BF3F800CE6A9C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E4CDBE59220BF3F800CE6A9C /* WWDC_srtTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E4F327C01F406EA80018B524 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -378,6 +483,7 @@
 				E434C8F71F8DFBEB00DA9B30 /* OperationErrors.swift in Sources */,
 				E434C90C1F8EB2F900DA9B30 /* DownloadWebvttOperation.swift in Sources */,
 				E423320C1F9418E600B0D517 /* SubtitlesProgress.swift in Sources */,
+				E4173DC121FC00A400715013 /* GetSessionsListOperation.swift in Sources */,
 				E434C8EF1F8DFBEB00DA9B30 /* GroupOperation.swift in Sources */,
 				E434C90E1F8ED94400DA9B30 /* ExportSrtFileOperation.swift in Sources */,
 				E434C8F11F8DFBEB00DA9B30 /* URLSessionTaskOperation.swift in Sources */,
@@ -387,18 +493,20 @@
 				E434C9001F8E156D00DA9B30 /* FetchSubtitilesOperation.swift in Sources */,
 				E434C8F31F8DFBEB00DA9B30 /* Operation.swift in Sources */,
 				E431A32720C7FDA0000844BF /* LinksModel.swift in Sources */,
+				E4858EC321F78B8F006EC937 /* Presenter.swift in Sources */,
 				E431A31D20C6C161000844BF /* WWDCVideosController.swift in Sources */,
 				E434C9081F8E8FBC00DA9B30 /* ConvertToSubtitleOperation.swift in Sources */,
 				E431A32920C80F5E000844BF /* ParseHtmlVideoPageOperation.swift in Sources */,
 				E431A32020C7E869000844BF /* GetLinksOperation.swift in Sources */,
-				E431A32B20C81AE4000844BF /* ParseSessionsListOperation.swift in Sources */,
+				E431A32B20C81AE4000844BF /* FetchHtmlVideoPagesOperation.swift in Sources */,
 				E434C8FA1F8DFBEB00DA9B30 /* BlockObserver.swift in Sources */,
 				E434C8ED1F8DFBEB00DA9B30 /* NSLock+Operations.swift in Sources */,
 				E410760F1F91292400A4D4AB /* TextFileView.swift in Sources */,
 				E431A32D20C87163000844BF /* ExportLinksOperation.swift in Sources */,
-				E431A32520C7FBF0000844BF /* GetHtmlVideoPageOperation.swift in Sources */,
+				E431A32520C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift in Sources */,
 				E4D6DD3E1F6C73C200EE9B83 /* Model.swift in Sources */,
 				E434C8F41F8DFBEB00DA9B30 /* ReachabilityCondition.swift in Sources */,
+				E4173DC321FC016900715013 /* ParseSessionsListOperation.swift in Sources */,
 				E46069031F9599BB0009B113 /* String+Extensions.swift in Sources */,
 				E434C8F01F8DFBEB00DA9B30 /* BlockOperation.swift in Sources */,
 				E434C8F61F8DFBEB00DA9B30 /* OperationCondition.swift in Sources */,
@@ -408,6 +516,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E4CDBE5C220BF3F800CE6A9C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E4F327C31F406EA80018B524 /* WWDC.srt */;
+			targetProxy = E4CDBE5B220BF3F800CE6A9C /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E4F327CD1F406EA80018B524 /* Main.storyboard */ = {
@@ -421,6 +537,53 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		E4CDBE5D220BF3F800CE6A9C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2T492Q3SC8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WWDC.srtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samad.WWDC-srtTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WWDC.srt.app/Contents/MacOS/WWDC.srt";
+			};
+			name = Debug;
+		};
+		E4CDBE5E220BF3F800CE6A9C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 2T492Q3SC8;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = WWDC.srtTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.samad.WWDC-srtTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WWDC.srt.app/Contents/MacOS/WWDC.srt";
+			};
+			name = Release;
+		};
 		E4F327E71F406EA80018B524 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -570,6 +733,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E4CDBE5F220BF3F800CE6A9C /* Build configuration list for PBXNativeTarget "WWDC.srtTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E4CDBE5D220BF3F800CE6A9C /* Debug */,
+				E4CDBE5E220BF3F800CE6A9C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E4F327BF1F406EA80018B524 /* Build configuration list for PBXProject "WWDC.srt" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

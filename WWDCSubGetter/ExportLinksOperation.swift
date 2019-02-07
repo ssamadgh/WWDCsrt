@@ -41,12 +41,12 @@ final class ExportLinksOperation: Operation {
 			
 			if !linksModel.titles.isEmpty, !copyToUserDestinationURL {
 				let titlesURL = linksModel.titlesCacheURLFor(wwdcYear)
-				let text = linksModel.titles.unique().sorted().joined(separator: "\n")
+				let text = linksModel.titles.removingDuplicates().sorted().joined(separator: "\n")
 				try text.write(to: titlesURL, atomically: false, encoding: String.Encoding.utf8)
 			}
 			
 			if !linksModel.hdVideosLinks.isEmpty {
-				let text = linksModel.hdVideosLinks.unique().sorted().joined(separator: "\n")
+				let text = linksModel.hdVideosLinks.removingDuplicates().sorted().joined(separator: "\n")
 				if copyToUserDestinationURL {
 					let userHdVideoLinksURL = linksModel.userHdVideoLinksURLFor(wwdcYear)
 					try text.write(to: userHdVideoLinksURL, atomically: false, encoding: String.Encoding.utf8)
@@ -58,7 +58,7 @@ final class ExportLinksOperation: Operation {
 			}
 			
 			if !linksModel.sdVideosLinks.isEmpty {
-				let text = linksModel.sdVideosLinks.unique().sorted().joined(separator: "\n")
+				let text = linksModel.sdVideosLinks.removingDuplicates().sorted().joined(separator: "\n")
 				if copyToUserDestinationURL {
 					let userSdVideoLinksURL = linksModel.userSdVideoLinksURLFor(wwdcYear)
 					try text.write(to: userSdVideoLinksURL, atomically: false, encoding: String.Encoding.utf8)
@@ -70,7 +70,7 @@ final class ExportLinksOperation: Operation {
 			}
 			
 			if !linksModel.pdfLinks.isEmpty {
-				let text = linksModel.pdfLinks.unique().sorted().joined(separator: "\n")
+				let text = linksModel.pdfLinks.removingDuplicates().sorted().joined(separator: "\n")
 				if copyToUserDestinationURL {
 					let userPdfLinksURL = linksModel.userPdfLinksURLFor(wwdcYear)
 					try text.write(to: userPdfLinksURL, atomically: false, encoding: String.Encoding.utf8)
@@ -82,7 +82,7 @@ final class ExportLinksOperation: Operation {
 			}
 			
 			if !linksModel.sampleCodesLinks.isEmpty {
-				let text = linksModel.sampleCodesLinks.unique().sorted().joined(separator: "\n")
+				let text = linksModel.sampleCodesLinks.removingDuplicates().sorted().joined(separator: "\n")
 				if copyToUserDestinationURL {
 					let userSampleCodesLinksURL = linksModel.userSampleCodesLinksURLFor(wwdcYear)
 					try text.write(to: userSampleCodesLinksURL, atomically: false, encoding: String.Encoding.utf8)

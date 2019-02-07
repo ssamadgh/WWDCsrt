@@ -73,7 +73,7 @@ struct Subtitle: Comparable {
 	
 	/// Subtitle name for SD version of WWDC Video
 	private var subtitleNameForSD: String {
-		return self.subtitleNameForHD.replace("_hd_", with: "_sd_").replace("-HD", with: "-SD")
+		return self.subtitleNameForHD.replace("_hd_", with: "_sd_").replace("-HD", with: "-SD").replace("_hd.", with: "_sd.")
 	}
 	
 	/// The url that used to download subtitle m3u8 file
@@ -152,7 +152,7 @@ struct Subtitle: Comparable {
 		
 		// Some of webvtts have some joint content. we need found this joint parts and delete them.
 		var subArray = subString.components(separatedBy: "\n\n")
-		subArray = subArray.unique()
+		subArray = subArray.removingDuplicates()
 		subString = subArray.filter{!$0.isEmpty}.map{"\(subArray.index(of: $0)! + 1)\n" + $0 }.joined(separator: "\n\n\n") + "\n\n"
 		self.saveSrtFileAtDestination(with: subString)
 		SubtitlesProgress.changed()

@@ -12,20 +12,16 @@ import Foundation
 extension Array where Element: Hashable {
     
     /// A method which return unique values of array.
-    func unique() -> [Element] {
-        
-        var buffer = [Element]()
-        
-        var added = Set<Element>()
-        
-        for elem in self {
-            
-            if !added.contains(elem) {
-                buffer.append(elem)
-                added.insert(elem)
-            }
-        }
-        return buffer
-    }
+	func removingDuplicates() -> [Element] {
+		var addedDict = [Element: Bool]()
+		
+		return filter {
+			addedDict.updateValue(true, forKey: $0) == nil
+		}
+	}
+	
+	mutating func removeDuplicates() {
+		self = self.removingDuplicates()
+	}
 }
 

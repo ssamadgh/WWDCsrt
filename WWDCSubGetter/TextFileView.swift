@@ -47,7 +47,7 @@ final class TextFileView: NSView {
     }
     
     // We want just accept files that are text type
-    let filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes:NSAttributedString.textTypes]
+    lazy var filteringOptions = [NSPasteboard.ReadingOptionKey.urlReadingContentsConformToTypes:NSAttributedString.textTypes]
     
     func shouldAllowDrag(_ draggingInfo: NSDraggingInfo) -> Bool {
         

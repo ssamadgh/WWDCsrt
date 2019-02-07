@@ -10,13 +10,11 @@ import Cocoa
 
 /// An enum for wwdc selection `popUpButton`
 
-var isTesting: Bool = false
-
 let lastWWDC = WWDC.of2018
 
 enum WWDC: String {
-	//fall2017
-	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", ofFall2017 = "Fall 2017", of2018 = "2018"
+	//tech-talks
+	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks", of2018 = "2018"
 	
 	var stringValue: String {
 		switch self {
@@ -30,36 +28,19 @@ enum WWDC: String {
 			return "wwdc2016"
 		case .of2017:
 			return "wwdc2017"
-		case .ofFall2017:
-			return "fall2017"
+		case .techTalks:
+			return "tech-talks"
 		case .of2018:
 			return "wwdc2018"
 		}
 	}
-	
-	var numberValue: Int {
-		switch self {
-		case .of2013:
-			return 2013
-		case .of2014:
-			return 2014
-		case .of2015:
-			return 2015
-		case .of2016:
-			return 2016
-		case .of2017:
-			return 2017
-		case .ofFall2017:
-			return 20173
-		case .of2018:
-			return 2018
-		}
-	}
-	
+		
 }
 
 final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFieldDelegate, NSComboBoxCellDataSource, NSComboBoxDataSource, NSComboBoxDelegate, ProgressView {
-    
+	
+	var isTesting: Bool = false
+	
     // MARK: - Enums
     
     /// An enum for tabView items based on its identifier
@@ -123,8 +104,10 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 	
 	@IBOutlet weak var sdRadioButton: NSButton!
 	
-	let operationQueue = OperationQueue()
-    
+//	let operationQueue = OperationQueue()
+	
+	let presenter = Presenter()
+	
     var draggedTextFileURL: URL?
     var draggedTextFileSubtitles: [Subtitle] = []
     
@@ -152,6 +135,9 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 	
 	var videoQuality: VideoQuality = .hd
 	
+	var wwdcsSessionsUpdateStatusDic: [WWDC:Bool] = [:]
+	
+	
     // MARK: - View methods
     
     override func viewDidLoad() {
@@ -172,9 +158,9 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         self.comboBox.dataSource = self
         self.comboBox.completes = true
 
-		self.getSessionsListForSelecteWWDC(checkForExistingCache: self.selectedWWDC != lastWWDC)
-		
-        // Checking if there is `documentDirectory` set it as default destination.
+		self.getSessionsListForSelecteWWDC()
+
+		// Checking if there is `documentDirectory` set it as default destination.
         
         if let dir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first {
 
@@ -194,8 +180,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		self.hdRadioButton.state = .on
 		
 		if isTesting {
-			let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-			
+			let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true).appendingPathComponent("com.samad.WWDC.srt")
 			
 			NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
 		}
@@ -206,7 +191,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     // MARK: - Session tabView methods
     
     @IBAction func popUpButtonClicked(_ sender: NSPopUpButton) {
-//        self.getSubtitlesForSelectedWWDC()
 		self.getSessionsListForSelecteWWDC()
 
 		if let path = self.destinationTextField.placeholderString {
@@ -330,32 +314,32 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     
     // MARK: - Video Link tabView methods
     
-    override func controlTextDidChange(_ obj: Notification) {
-        if (obj.object as? NSTextField) === self.videoLinkTextField {
-            guard !self.videoLinkTextField.stringValue.isEmpty else {
-                self.videoLinkTabViewStatusLabel.stringValue = ""
-                return
-            }
-            let convertToSubtitleOperation = ConvertToSubtitleOperation(from: self.videoLinkTextField.stringValue, type: .videoLink) { (subtitles) in
-                if !subtitles.isEmpty {
-                    self.videoLinkSubtitle = subtitles.first
-                    DispatchQueue.main.async {
-                        self.videoLinkTextField.stringValue = self.videoLinkSubtitle!.videoURL
-                        self.videoLinkTabViewStatusLabel.stringValue = "Ready to download subtitle"
-                        self.videoLinkTabViewStatusLabel.textColor = NSColor.moss
-                    }
-                }
-                else {
-                    DispatchQueue.main.async {
-                        self.videoLinkTabViewStatusLabel.stringValue = "Error: Video Link is not valid"
-                        self.videoLinkTabViewStatusLabel.textColor = NSColor.red
-                    }
-                }
-            }
-            
-            self.operationQueue.addOperation(convertToSubtitleOperation)
-        }
-    }
+	override func controlTextDidChange(_ obj: Notification) {
+		
+		guard (obj.object as? NSTextField) === self.videoLinkTextField,
+			!self.videoLinkTextField.stringValue.isEmpty else {
+				self.videoLinkTabViewStatusLabel.stringValue = ""
+				return
+		}
+		
+		self.presenter.convertToSubtitle(from: self.videoLinkTextField.stringValue, type: .videoLink) { (subtitles) in
+			if !subtitles.isEmpty {
+				self.videoLinkSubtitle = subtitles.first
+				DispatchQueue.main.async {
+					self.videoLinkTextField.stringValue = self.videoLinkSubtitle!.videoURL
+					self.videoLinkTabViewStatusLabel.stringValue = "Ready to download subtitle"
+					self.videoLinkTabViewStatusLabel.textColor = NSColor.moss
+				}
+			}
+			else {
+				DispatchQueue.main.async {
+					self.videoLinkTabViewStatusLabel.stringValue = "Error: Video Link is not valid"
+					self.videoLinkTabViewStatusLabel.textColor = NSColor.red
+				}
+			}
+		}
+		
+	}
     
     // MARK: - Text File tabView method
     
@@ -363,7 +347,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         
         self.draggedTextFileURL = url
         
-        let convertToSubtitleOperation = ConvertToSubtitleOperation(from: url.path, type: .textFile) { (subtitles) in
+        self.presenter.convertToSubtitle(from: url.path, type: .textFile) { (subtitles) in
             if !subtitles.isEmpty {
                 self.draggedTextFileSubtitles = subtitles
                 
@@ -382,8 +366,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
                 }
             }
         }
-        
-        self.operationQueue.addOperation(convertToSubtitleOperation)
     }
     
     func showErrorForTexFileViewTabAnimately() {
@@ -472,14 +454,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
             break
         }
         
-//        if !model.isEmpty {
-//			self.startGetSubtitleOperation(for: selectedWWDC)
-//        }
-//        else {
-//            let error = "Error: No valid video link is imported."
-//            self.endDownloadingStatus(withError: error)
-//            self.endDownloadingStatus()
-//        }
     }
     
     
@@ -496,11 +470,10 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				let sessionNumber = String(textArray.first!)
 				let hdVideoURL = linksModel.hdVideoCacheURLFor(wwdc)
 				
-				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
-					
+				func getSubtitle() {
 					let data = try! String(contentsOfFile:hdVideoURL.path, encoding: String.Encoding.utf8)
 					var searchString = ""
-					if wwdc == .ofFall2017 {
+					if wwdc == .techTalks {
 						searchString = "/\(sessionNumber)"
 					}
 					else {
@@ -512,29 +485,40 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							model.update(subtitle)
 						}
 					}
-					
 				}
 				
-				if !model.isEmpty {
-					self.startGetSubtitleOperation(for: selectedWWDC)
+				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
+					getSubtitle()
 				}
 				else {
-					let error = "Error: No valid video link is imported."
-					self.endDownloadingStatus(withError: error)
-					self.endDownloadingStatus()
+					self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, sessionNumber: sessionNumber, copyToUserDestinationURL: false) {
+						getSubtitle()
+					}
 				}
+				
+				DispatchQueue.main.async {
+					if !model.isEmpty {
+						self.startGetSubtitleOperation(for: wwdc)
+					}
+					else {
+						let error = "Error: No valid video link is imported."
+						self.endDownloadingStatus(withError: error)
+						self.endDownloadingStatus()
+					}
 
+				}
+				
+				
 			case .allSessions:
 				
 				let hdVideoURL = linksModel.hdVideoCacheURLFor(wwdc)
 				
-				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
-
-					let convertToSubtitleOperation = ConvertToSubtitleOperation(from: hdVideoURL.path, type: .textFile) { (subtitles) in
+				func getSubtitles() {
+					self.presenter.convertToSubtitle(from: hdVideoURL.path, type: .textFile) { (subtitles) in
 						
 						DispatchQueue.main.async {
 							model.update(subtitles)
-
+							
 							if !model.isEmpty {
 								self.startGetSubtitleOperation(for: self.selectedWWDC)
 							}
@@ -543,14 +527,19 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 								self.endDownloadingStatus(withError: error)
 								self.endDownloadingStatus()
 							}
-
+							
 						}
-						
-
 					}
-
-					self.operationQueue.addOperation(convertToSubtitleOperation)
+				}
+				
+				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
+					getSubtitles()
 					
+				}
+				else {
+					self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, copyToUserDestinationURL: false) {
+						getSubtitles()
+					}
 				}
 
 			}
@@ -681,13 +670,13 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 	func getSubtitlesFromPath(path: String) -> [Subtitle] {
 		var subtitles: [Subtitle] = []
 		let semaphore = DispatchSemaphore.init(value: 0)
-		let convertToSubtitleOperation = ConvertToSubtitleOperation(from: path, type: .textFile) { (subs) in
+		
+		self.presenter.convertToSubtitle(from: path, type: .textFile) { (subs) in
 			subtitles = subs
 //			model.update(subtitles)
 			semaphore.signal()
 		}
 		
-		self.operationQueue.addOperation(convertToSubtitleOperation)
 		semaphore.wait()
 		return subtitles
 	}
@@ -718,7 +707,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         self.progressIndicator.alphaValue = 1
         self.progressIndicator.startAnimation(nil)
 
-        let operation = GetSubtitlesOperation {
+        self.presenter.getSubtitles {
             self.endDownloadingStatus()
 			
 			let userDestinationURL = model.destinationURL!
@@ -726,7 +715,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 			NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: userDestinationURL.path)
 
         }
-        self.operationQueue.addOperation(operation)
+		
     }
     
     func endDownloadingStatus(withError: String? = nil) {
@@ -760,25 +749,27 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         let fileName = "WWDC\(selectedYear)_links"
 		guard let path = Bundle.main.path(forResource: fileName, ofType: "txt") else { return }
         
-        let convertToSubtitleOperation = ConvertToSubtitleOperation(from: path, type: .textFile) { (subtitles) in
+        self.presenter.convertToSubtitle(from: path, type: .textFile) { (subtitles) in
             self.wwdcVideosSubtitlesDic[selectedWWDC] = subtitles
             
             DispatchQueue.main.async {
                 self.comboBox.reloadData()
             }
         }
-        self.operationQueue.addOperation(convertToSubtitleOperation)
+		
     }
 	
 	
-	func getSessionsListForSelecteWWDC(checkForExistingCache: Bool = true) {
+	func getSessionsListForSelecteWWDC() {
+		
 		let wwdcYear = self.popUpButton.selectedItem!.title
 		let selectedWWDC = WWDC(rawValue: wwdcYear)!
 		
 		let titleURL = linksModel.titlesCacheURLFor(selectedWWDC)
 		
-		if FileManager.default.fileExists(atPath: titleURL.path), checkForExistingCache {
-			
+		let sessionListFileExist = FileManager.default.fileExists(atPath: titleURL.path)
+		
+		func configureSessionList() {
 			DispatchQueue.global().async {
 				let data = try! String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
 				let sessionsListArray = data.components(separatedBy: "\n")
@@ -786,28 +777,51 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				DispatchQueue.main.async {
 					self.comboBox.reloadData()
 				}
-
 			}
-
+		}
+		
+		if sessionListFileExist {
+			configureSessionList()
+			let isUpdated = (self.wwdcsSessionsUpdateStatusDic[selectedWWDC] ?? false)
+			guard !isUpdated else { return }
+			self.getSessionsList(for: selectedWWDC, inBackground: true, copyToUserDestinationURL: false) {
+				configureSessionList()
+			}
+			
 		}
 		else {
 			
-			self.getLinks(for: [SessionDataTypes.video(.hd), SessionDataTypes.pdf], wwdcYear: selectedWWDC, copyToUserDestinationURL: false) {
-				let titleURL = linksModel.titlesCacheURLFor(selectedWWDC)
-				
-				var sessionsListArray: [String] = []
-				if FileManager.default.fileExists(atPath: titleURL.path) {
-					let data = try! String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
-					sessionsListArray = data.components(separatedBy: "\n")
-				}
-				
-				self.sessionsListArray = sessionsListArray
-
-				DispatchQueue.main.async {
-					self.comboBox.reloadData()
-				}
+			self.getSessionsList(for: selectedWWDC, inBackground: false, copyToUserDestinationURL: false) {
+				configureSessionList()
 			}
 		}
+		
+	}
+	
+	
+	func getSessionsList(for wwdcYear: WWDC, inBackground: Bool, copyToUserDestinationURL: Bool, completionHandler: @escaping () -> Void) {
+		
+		if !inBackground {
+			self.getButton.isEnabled = false
+			self.comboBox.isEnabled = false
+			self.popUpButton.isEnabled = false
+			self.circularIndicator.startAnimation(nil)
+		}
+		
+		self.presenter.getSessionsList(for: wwdcYear, copyToUserDestinationURL: copyToUserDestinationURL) {
+			self.wwdcsSessionsUpdateStatusDic[wwdcYear] = true
+			DispatchQueue.main.async {
+				if !inBackground {
+					self.getButton.isEnabled = true
+					self.comboBox.isEnabled = true
+					self.popUpButton.isEnabled = true
+					self.circularIndicator.stopAnimation(nil)
+				}
+				completionHandler()
+			}
+			
+		}
+		
 	}
 	
 	func getLinks(for types: [SessionDataTypes], wwdcYear: WWDC, sessionNumber: String? = nil, copyToUserDestinationURL: Bool, completionHandler: @escaping () -> Void) {
@@ -817,7 +831,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		self.popUpButton.isEnabled = false
 		self.circularIndicator.startAnimation(nil)
 		
-		let getLinksOperation = GetLinksOperation(for: types, wwdcYear: wwdcYear, sessionNumber: sessionNumber, copyToUserDestinationURL: copyToUserDestinationURL) {
+		self.presenter.getLinks(for: types, wwdcYear: wwdcYear, sessionNumber: sessionNumber, copyToUserDestinationURL: copyToUserDestinationURL) {
 			
 			DispatchQueue.main.async {
 				self.getButton.isEnabled = true
@@ -827,16 +841,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				completionHandler()
 			}
 			
-			
-			//				let cachesFolder = try! FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-			//				let destinationURL = cachesFolder.appendingPathComponent("\(wwdcYear.stringValue)/", isDirectory: true)
-			//				let userDestinationURL = model.destinationURL!
-			//
-			//				NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
-			//				print(destinationURL.path)
-			
 		}
-		self.operationQueue.addOperation(getLinksOperation)
 
 	}
 	

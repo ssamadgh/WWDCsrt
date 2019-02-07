@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class GetHtmlVideoPageOperation: GroupOperation {
+final class DownloadHtmlVideoPageOperation: GroupOperation {
 	
 	//MARK: Properties
 	

@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14113"/>
-        <capability name="box content view" minToolsVersion="7.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -316,7 +315,7 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="WWDC.srt" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
+                    <window key="window" title="WWDC.srt" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
                         <rect key="contentRect" x="196" y="240" width="630" height="420"/>
@@ -353,7 +352,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fzV-OB-wwG">
-                                                    <rect key="frame" x="6" y="135" width="52" height="17"/>
+                                                    <rect key="frame" x="6" y="136" width="52" height="17"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="WWDC:" id="Arn-kX-2R4">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -361,7 +360,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M6Q-Zv-3Yq">
-                                                    <rect key="frame" x="248" y="130" width="345" height="26"/>
+                                                    <rect key="frame" x="259" y="130" width="334" height="26"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Type number of session here" drawsBackground="YES" numberOfVisibleItems="5" id="FB9-cm-dUp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -377,7 +376,7 @@
                                                     </connections>
                                                 </comboBox>
                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y3e-ud-86c">
-                                                    <rect key="frame" x="62" y="130" width="91" height="26"/>
+                                                    <rect key="frame" x="62" y="131" width="102" height="25"/>
                                                     <popUpButtonCell key="cell" type="push" title="2018" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="SHM-Sb-JyO" id="gAr-hK-jRl">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="menu"/>
@@ -388,8 +387,8 @@
                                                                 <menuItem title="2015" id="7yw-nU-fth"/>
                                                                 <menuItem title="2016" id="ddq-Sk-uJN"/>
                                                                 <menuItem title="2017" id="3Mh-go-LDA"/>
-                                                                <menuItem title="Fall 2017" id="1yZ-EV-Gxs"/>
                                                                 <menuItem title="2018" state="on" id="SHM-Sb-JyO"/>
+                                                                <menuItem title="Tech Talks" id="1yZ-EV-Gxs"/>
                                                             </items>
                                                         </menu>
                                                     </popUpButtonCell>
@@ -398,7 +397,7 @@
                                                     </connections>
                                                 </popUpButton>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="rLA-Pd-Kos">
-                                                    <rect key="frame" x="169" y="135" width="73" height="18"/>
+                                                    <rect key="frame" x="180" y="135" width="73" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Session:" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="QuP-ht-aZD">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -408,7 +407,7 @@
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Tdh-r6-eFZ">
-                                                    <rect key="frame" x="169" y="95" width="95" height="18"/>
+                                                    <rect key="frame" x="180" y="95" width="95" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="All Sessions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Gsz-1a-xQd">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -540,7 +539,7 @@
                                                     <rect key="frame" x="20" y="100" width="558" height="21"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste WWDC Video link here..." drawsBackground="YES" id="wrj-F3-9iK">
                                                         <font key="font" metaFont="cellTitle"/>
-                                                        <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
@@ -613,6 +612,7 @@
                                     <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
+                                    <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                                 </buttonCell>
                                 <connections>
                                     <action selector="getSubtitleButtonClicked:" target="XfG-lQ-9wD" id="mvQ-GU-BQD"/>
@@ -638,7 +638,7 @@ DQ
                                 <rect key="frame" x="46" y="21" width="463" height="20"/>
                             </progressIndicator>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="XcJ-82-JOY">
-                                <rect key="frame" x="20" y="41" width="16" height="16"/>
+                                <rect key="frame" x="20" y="40" width="16" height="16"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6j-Uv-YIP">
                                 <rect key="frame" x="44" y="42" width="37" height="17"/>

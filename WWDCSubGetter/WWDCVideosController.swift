@@ -18,27 +18,64 @@ enum VideoQuality: String {
 
 class WWDCVideosController {
 	
-	class func getHDorSDdURLs(fromHTML: String, format: VideoQuality) -> (String) {
-
-		let formatValue = format == .hd ? "[hH][dD]" : "[sS][dD]"
+	class func getSessionsList(fromHTML: String, wwdcYear: String) -> [String] {
 		
-		let pat = "\\b.*(http(?:s)?://.*" + formatValue + ".*\\.m[op4][v4])\\b"
+		let nsFromHTML = fromHTML as NSString
+//		let pat = "video-title\\\\\"\\>(.*?)\\<\\/h\\d\\>"
+		let pat = "href=\"\\/videos\\/play\\/[^ ]*?\\/([0-9]*)\\/\".*?video-title\"\\>(.*?)\\<\\/h\\d\\>"
 
+		let regex = try! NSRegularExpression(pattern: pat, options: NSRegularExpression.Options.dotMatchesLineSeparators)
+		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
+		
+		var sessionsListArray = [String]()
+		
+		
+		matches.forEach { (match) in
+			let numRange = match.range(at: 1)
+			let titleRange = match.range(at: 2)
+			let sessionNumber = nsFromHTML.substring(with: numRange) + " _ " + nsFromHTML.substring(with: titleRange)
+			
+			sessionsListArray.append(sessionNumber)
+			
+		}
+		
+		return sessionsListArray
+	}
+	
+	class func getGenericURLs(fromHTML: String) -> [String] {
+		let pat = "(http(?:s)?[^ ]*?)\\?dl"
+		//(http(?:s)?.*?\\.[mpz][op4di][v4afp])
+		//(http(?:s)?.*?\\.(?:mp4|m4a|mov|pdf|zip))
+		
 		let regex = try! NSRegularExpression(pattern: pat, options: [])
 		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
+		
+		return []
+	}
+	
+	class func getHDorSDdURLs(fromHTML: String, format: VideoQuality) -> (String) {
+		
+		let formatValue = format == .hd ? "[hH][dD]" : "[sS][dD]"
+		
+//		let pat = "\\b.*?(http(?:s)?://.*?" + formatValue + ".*?\\.m[op4][v4a])\\b"
+		let pat = "(http(?:s)?[^ ]*?" + formatValue + "[^ ]*?)\\?dl"
+//		let pat = "(http(?:s)?[^ ]*?" + formatValue + "[^ ]*?\\.(?:mp4|m4a|mov))"
+		let regex = try! NSRegularExpression(pattern: pat, options: [])
+		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
+		
 		var videoURL = ""
 		if !matches.isEmpty {
 			let range = matches[0].range(at: 1)
-			let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-				fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-			videoURL = String(fromHTML[r])
+			videoURL = (fromHTML as NSString).substring(with: range)
 		}
 		
 		return videoURL
 	}
 	
 	class func getPDFResourceURL(fromHTML: String) -> [String] {
-		let pat = "\\b.*(http(?:s)?://.*\\.pdf)\\b"
+//		let pat = "\\b.*(http(?:s)?://.*\\.pdf)\\b"
+		let pat = "(http(?:s)?[^ ]*?\\.pdf)\\?dl"
+
 		let regex = try! NSRegularExpression(pattern: pat, options: [])
 		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
 //		var pdfResourceURL = ""
@@ -54,65 +91,26 @@ class WWDCVideosController {
 		var pdfResourceURLPaths : [String] = []
 		for match in matches {
 			let range = match.range(at: 1)
-			let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-				fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-			let path = String(fromHTML[r])
+			let path = (fromHTML as NSString).substring(with: range)
 			pdfResourceURLPaths.append(path)
 		}
 		
 		return pdfResourceURLPaths
-
-	}
-	
-	class func getSampleCodeURL2(fromHTML: String) -> [String] {
-		let pat = "\\b.*(http(?:s)?://.*\\.zip)\\b"
-		let regex = try! NSRegularExpression(pattern: pat, options: [])
-		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
-		
-		var sampleURLPaths : [String] = []
-		for match in matches {
-			let range = match.range(at: 1)
-			let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-				fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-			let path = String(fromHTML[r])
-			sampleURLPaths.append(path)
-		}
-		
-		return sampleURLPaths
-	}
-
-	
-	
-	class func getTitle(fromHTML: String) -> (String) {
-		let pat = "<h1>(.*)</h1>"
-		let regex = try! NSRegularExpression(pattern: pat, options: [])
-		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
-		var title = ""
-		if !matches.isEmpty {
-			let range = matches[0].range(at: 1)
-			let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-				fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-			title = String(fromHTML[r])
-		}
-		
-		return title
 	}
 	
 	class func getSampleCodeURL(fromHTML: String) -> [String] {
-		let pat = "\\b.*(href=\".*/content/samplecode/.*\")\\b"
+		let pat = "(href=\"[^ ]*?/content/samplecode/.*?=\")"
 		let regex = try! NSRegularExpression(pattern: pat, options: [])
 		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
 		var sampleURLPaths : [String] = []
 		for match in matches {
 			let range = match.range(at: 1)
-			let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-				fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-			var path = String(fromHTML[r])
+			var path = (fromHTML as NSString).substring(with: range)
 			
 			// Tack on the hostname if it's not already there (some URLs are listed as
 			// relative URL while some are fully-qualified).
 			let prefixReplacementString: String
-			if path.contains("href=\"http") == false {
+			if !path.contains("href=\"http") {
 				prefixReplacementString = "http(?:s)?://developer.apple.com"
 			} else {
 				prefixReplacementString = ""
@@ -130,7 +128,7 @@ class WWDCVideosController {
 			let jsonText = getStringContent(fromURL: urlPath + "book.json")
 			if let data = jsonText.data(using: .utf8) {
 				let object = try? JSONSerialization.jsonObject(with: data, options: .allowFragments)
-				if let dictionary = object as? NSDictionary {
+				if let dictionary = object as? [String:Any] {
 					if let relativePath = dictionary["sampleCode"] as? String {
 						sampleArchivePaths.append(urlPath + relativePath)
 					}
@@ -140,6 +138,23 @@ class WWDCVideosController {
 		
 		return sampleArchivePaths
 	}
+	
+	class func getSampleCodeURL2(fromHTML: String) -> [String] {
+//		let pat = "\\b.*(http(?:s)?://.*\\.zip)\\b"
+		let pat = "(http(?:s)?[^ ]*?\\.zip)"
+		let regex = try! NSRegularExpression(pattern: pat, options: [])
+		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
+		
+		var sampleURLPaths : [String] = []
+		for match in matches {
+			let range = match.range(at: 1)
+			let path = (fromHTML as NSString).substring(with: range)
+			sampleURLPaths.append(path)
+		}
+		
+		return sampleURLPaths
+	}
+
 	
 	class func getStringContent(fromURL: String) -> (String) {
 		/* Configure session, choose between:
@@ -170,7 +185,7 @@ class WWDCVideosController {
 				// let statusCode = (response as! NSHTTPURLResponse).statusCode
 				// print("URL Session Task Succeeded: HTTP \(statusCode)")
 				result = String.init(data: data!, encoding:
-					.ascii)!
+					.utf8)!
 			}
 			else {
 				/* Failure */
@@ -182,27 +197,6 @@ class WWDCVideosController {
 		task.resume()
 		semaphore.wait()
 		return result
-	}
-
-	class func getSessionsList(fromHTML: String, wwdcYear: String) -> Array<String> {
-		let pat = "\"\\/videos\\/play\\/\(wwdcYear)\\/([0-9]*)\\/\""
-		let regex = try! NSRegularExpression(pattern: pat, options: [])
-		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
-		var sessionsListArray = [String]()
-		for match in matches {
-			for n in 0..<match.numberOfRanges {
-				let range = match.range(at: n)
-				let r = fromHTML.index(fromHTML.startIndex, offsetBy: range.location) ..<
-					fromHTML.index(fromHTML.startIndex, offsetBy: range.location+range.length)
-				switch n {
-				case 1:
-					//print(htmlSessionList.substring(with: r))
-					sessionsListArray.append(String(fromHTML[r]))
-				default: break
-				}
-			}
-		}
-		return sessionsListArray
 	}
 	
 	class func downloadFile(urlString: String, forSession sessionIdentifier: String = "???") {
@@ -219,13 +213,14 @@ class WWDCVideosController {
 		
 		print("[Session \(sessionIdentifier)] Getting \(fileName) (\(urlString)):")
 		
-		guard let url = URL(string: urlString) else {
+		guard URL(string: urlString) != nil else {
 			print("<\(urlString)> is not valid URL!")
 			return
 		}
 		
 		//		DownloadSessionManager.sharedInstance.downloadFile(fromURL: url, toPath: "\(fileName)")
 	}
+	
 }
 
 

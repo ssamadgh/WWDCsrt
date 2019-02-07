@@ -32,26 +32,26 @@ class ParseHtmlVideoPageOperation: Operation {
 	}
 	
 	override func execute() {
+		executeOld()
+	}
+	
+	func executeOld() {
 		
 		do {
-			
-			let data = try Data(contentsOf: self.cacheFile)
+			let data = try Data(contentsOf: self.cacheFile, options: Data.ReadingOptions.mappedIfSafe)
 			
 			let htmlText = String.init(data: data, encoding:
-				.ascii)!
-			let quality: VideoQuality = self.types.contains(SessionDataTypes.video(.sd)) ? .sd : .hd
-			let videoURLString = WWDCVideosController.getHDorSDdURLs(fromHTML: htmlText, format: quality)
+				.utf8)!
+//			let quality: VideoQuality = self.types.contains(SessionDataTypes.video(.sd)) ? .sd : .hd
 
-			if !videoURLString.isEmpty {
-				
-				let title = self.sessionNumber + " _ " + WWDCVideosController.getTitle(fromHTML: htmlText)
-				linksModel.titles.append(title)
-				
+//			if !videoURLString.isEmpty {
+			
 				for type in types {
 					
 					switch type {
 					case let .video(quality):
-						
+						let videoURLString = WWDCVideosController.getHDorSDdURLs(fromHTML: htmlText, format: quality)
+
 						if quality == .hd {
 							linksModel.hdVideosLinks.append(videoURLString)
 						}
@@ -73,10 +73,10 @@ class ParseHtmlVideoPageOperation: Operation {
 					}
 				}
 				
-			}
-			else {
-				try FileManager.default.removeItem(at: self.cacheFile)
-			}
+//			}
+//			else {
+//				try FileManager.default.removeItem(at: self.cacheFile)
+//			}
 			
 			finish()
 
@@ -85,6 +85,10 @@ class ParseHtmlVideoPageOperation: Operation {
 			print(error.localizedDescription)
 			finish([error] as [NSError])
 		}
+		
+	}
+	
+	func executeNew() {
 		
 	}
 

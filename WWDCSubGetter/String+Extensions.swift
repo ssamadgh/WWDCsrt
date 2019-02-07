@@ -85,7 +85,7 @@ extension String {
         
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [])
-            let range = NSMakeRange(0, self.characters.count)
+            let range = NSMakeRange(0, self.count)
             let matches = regex.matches(in: self, options: [], range: range)
             
             var groupMatches = [String]()
