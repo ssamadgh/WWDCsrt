@@ -28,6 +28,7 @@
 **version 1.6.0:**
 
 - Performance optimized. Now you get links and subtitles much faster.
+- Now supports Tech Talks Video's links
 
 **version 1.5.3:**
 
