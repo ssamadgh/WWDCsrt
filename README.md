@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://github.com/ssamadgh/WWDCsrt/releases" target="_blank">
-	    <img src="https://img.shields.io/badge/Version-1.5.3-brightgreen.svg?style=flat" alt="app version 1.5.3">
+	    <img src="https://img.shields.io/badge/Version-1.6.0-brightgreen.svg?style=flat" alt="app version 1.6.0">
     </a>
     <a href="https://developer.apple.com/swift/" target="_blank">
 	    <img src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" alt="Swift 4.0">
@@ -25,6 +25,9 @@
 #### An app for Download WWDC subtitles
 
 ### Whats New: 
+**version 1.6.0:**
+
+- Performance optimized. Now you get links and subtitles much faster.
 
 **version 1.5.3:**
 
