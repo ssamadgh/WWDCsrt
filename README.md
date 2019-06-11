@@ -25,6 +25,10 @@
 #### An app for Download WWDC subtitles
 
 ### Whats New: 
+**version 1.6.1:**
+
+- WWDC 2019 Added.
+
 **version 1.6.0:**
 
 - Performance optimized. Now you get links and subtitles much faster.
