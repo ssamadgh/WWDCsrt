@@ -27,7 +27,8 @@ class GroupOperation: Operation {
     fileprivate let finishingOperation = Foundation.BlockOperation(block: {})
     
     fileprivate var aggregatedErrors = [NSError]()
-    
+	fileprivate let serialQueue = DispatchQueue(label: "GroupOperation_Serial_Queue")
+
     convenience init(operations: Foundation.Operation...) {
         self.init(operations: operations)
     }
@@ -109,11 +110,15 @@ extension GroupOperation: OperationQueueDelegate {
     }
     
     final func operationQueue(_ operationQueue: OperationQueue, operationDidFinish operation: Foundation.Operation, withErrors errors: [NSError]) {
-        aggregatedErrors.append(contentsOf: errors)
-        
+		self.serialQueue.async {
+			self.aggregatedErrors.append(contentsOf: errors)
+		}
+
         if operation === finishingOperation {
             internalQueue.isSuspended = true
-            finish(aggregatedErrors)
+			self.serialQueue.sync {
+				finish(aggregatedErrors)
+			}
         }
         else if operation !== startingOperation {
             operationDidFinish(operation, withErrors: errors)

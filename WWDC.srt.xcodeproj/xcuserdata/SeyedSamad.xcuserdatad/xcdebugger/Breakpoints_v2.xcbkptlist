@@ -234,11 +234,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.956578"
+            timestampString = "581915108.002982"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "467"
-            endingLineNumber = "467"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
             landmarkName = "getSubtitleFromSession(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.95665"
+            timestampString = "581915108.0030839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "677"
-            endingLineNumber = "677"
+            startingLineNumber = "679"
+            endingLineNumber = "679"
             landmarkName = "getSubtitlesFromPath(path:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.956699"
+            timestampString = "581915108.003134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "648"
-            endingLineNumber = "648"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
             landmarkName = "downloadLinks(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -438,7 +438,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "213"
             endingLineNumber = "213"
-            landmarkName = "getStringContent(fromURL:)"
+            landmarkName = "downloadFile(urlString:forSession:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -454,7 +454,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "172"
             endingLineNumber = "172"
-            landmarkName = "getSampleCodeURL2(fromHTML:)"
+            landmarkName = "getStringContent(fromURL:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -481,11 +481,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.95803"
+            timestampString = "581915108.003287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Actions>
@@ -553,11 +553,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "Yes"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.958135"
+            timestampString = "581915108.003341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "779"
-            endingLineNumber = "779"
+            startingLineNumber = "781"
+            endingLineNumber = "781"
             landmarkName = "configureSessionList()"
             landmarkType = "9">
             <Actions>
@@ -577,11 +577,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "WWDCSubGetter/MainViewController.swift"
-            timestampString = "571218750.958192"
+            timestampString = "581915108.003382"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "418"
-            endingLineNumber = "418"
+            startingLineNumber = "420"
+            endingLineNumber = "420"
             landmarkName = "getSubtitleButtonClicked(_:)"
             landmarkType = "7">
          </BreakpointContent>

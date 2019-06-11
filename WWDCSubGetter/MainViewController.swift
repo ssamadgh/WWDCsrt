@@ -14,7 +14,7 @@ let lastWWDC = WWDC.of2018
 
 enum WWDC: String {
 	//tech-talks
-	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks", of2018 = "2018"
+	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks", of2018 = "2018", of2019 = "2019"
 	
 	var stringValue: String {
 		switch self {
@@ -32,6 +32,8 @@ enum WWDC: String {
 			return "tech-talks"
 		case .of2018:
 			return "wwdc2018"
+		case .of2019:
+			return "wwdc2019"
 		}
 	}
 		
