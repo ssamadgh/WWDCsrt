@@ -66,9 +66,12 @@ class ParseHtmlVideoPageOperation: Operation {
 					case .sampleCode:
 						let sampleCodesURLStrings = WWDCVideosController.getSampleCodeURL(fromHTML: htmlText)
 						let sampleCodesURLStrings2 = WWDCVideosController.getSampleCodeURL2(fromHTML: htmlText)
-
+						let sampleCodesURLStrings3 = WWDCVideosController.getSampleCodeURL3(fromHTML: htmlText)
+						
 						linksModel.sampleCodesLinks.append(contentsOf: sampleCodesURLStrings)
 						linksModel.sampleCodesLinks.append(contentsOf: sampleCodesURLStrings2)
+						linksModel.sampleCodesLinks.append(contentsOf: sampleCodesURLStrings3)
+
 
 					}
 				}

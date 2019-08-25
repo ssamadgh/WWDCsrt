@@ -510,7 +510,6 @@
                                                                 </subviews>
                                                             </view>
                                                             <color key="borderColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                            <color key="fillColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         </box>
                                                     </subviews>
                                                 </customView>
@@ -645,7 +644,7 @@ DQ
                                 <rect key="frame" x="44" y="42" width="37" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="XAd-t5-Ibg">
                                     <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>

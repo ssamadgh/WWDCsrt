@@ -155,6 +155,51 @@ class WWDCVideosController {
 		return sampleURLPaths
 	}
 
+	class func getSampleCodeURL3(fromHTML: String) -> [String] {
+//		let pat = "(href=\"[^ ]*?/content/samplecode/.*?=\")"
+		let pat = "href=\"([^ ]*?/documentation/.*?)\""
+		let regex = try! NSRegularExpression(pattern: pat, options: [])
+		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
+		var sampleURLPaths : [String] = []
+		for match in matches {
+			let range = match.range(at: 1)
+			var path = (fromHTML as NSString).substring(with: range)
+			
+			// Tack on the hostname if it's not already there (some URLs are listed as
+			// relative URL while some are fully-qualified).
+			let prefixReplacementString: String
+			if !path.contains("href=\"http") {
+				prefixReplacementString = "http(?:s)?://developer.apple.com"
+			} else {
+				prefixReplacementString = ""
+			}
+			path = path.replacingOccurrences(of: "href=\"", with: prefixReplacementString)
+			
+			// Strip target attribute suffix
+			path = path.replacingOccurrences(of: "\" target=\"", with: "/")
+			
+			sampleURLPaths.append(path)
+		}
+		
+		var sampleArchivePaths : [String] = []
+		for urlPath in sampleURLPaths {
+			let htmlText = getStringContent(fromURL: urlPath)
+
+			let pat = "href=\"([^ ]*?/published/.*?.zip)\""
+			let regex = try! NSRegularExpression(pattern: pat, options: [])
+			let matches = regex.matches(in: htmlText, options: [], range: NSRange(location: 0, length: htmlText.count))
+			for match in matches {
+				let range = match.range(at: 1)
+				let path = (htmlText as NSString).substring(with: range)
+				
+				sampleArchivePaths.append(path)
+			}
+			
+		}
+		
+		return sampleArchivePaths
+	}
+	
 	
 	class func getStringContent(fromURL: String) -> (String) {
 		/* Configure session, choose between:
@@ -184,8 +229,11 @@ class WWDCVideosController {
 				/* Success */
 				// let statusCode = (response as! NSHTTPURLResponse).statusCode
 				// print("URL Session Task Succeeded: HTTP \(statusCode)")
-				result = String.init(data: data!, encoding:
-					.utf8)!
+				if let data = data, let string = String.init(data: data, encoding:
+					.utf8) {
+					result = string
+
+				}
 			}
 			else {
 				/* Failure */
