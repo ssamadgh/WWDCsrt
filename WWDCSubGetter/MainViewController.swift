@@ -490,29 +490,30 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							model.update(subtitle)
 						}
 					}
+					
+					DispatchQueue.main.async {
+						if !model.isEmpty {
+							self.startGetSubtitleOperation(for: wwdc)
+						}
+						else {
+							let error = "Error: No valid video link is imported."
+							self.endDownloadingStatus(withError: error)
+							self.endDownloadingStatus()
+						}
+
+					}
+					
+					
 				}
 				
 				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
+					try? FileManager.default.removeItem(at: hdVideoURL)
+				}
+				
+				self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, sessionNumber: sessionNumber, copyToUserDestinationURL: false) {
 					getSubtitle()
 				}
-				else {
-					self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, sessionNumber: sessionNumber, copyToUserDestinationURL: false) {
-						getSubtitle()
-					}
-				}
-				
-				DispatchQueue.main.async {
-					if !model.isEmpty {
-						self.startGetSubtitleOperation(for: wwdc)
-					}
-					else {
-						let error = "Error: No valid video link is imported."
-						self.endDownloadingStatus(withError: error)
-						self.endDownloadingStatus()
-					}
 
-				}
-				
 				
 			case .allSessions:
 				
@@ -538,14 +539,12 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				}
 				
 				if FileManager.default.fileExists(atPath: hdVideoURL.path) {
-					getSubtitles()
-					
+					try? FileManager.default.removeItem(at: hdVideoURL)
 				}
-				else {
-					self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, copyToUserDestinationURL: false) {
+
+				self.presenter.getLinks(for: [.video(.hd)], wwdcYear: wwdc, copyToUserDestinationURL: false) {
 						getSubtitles()
 					}
-				}
 
 			}
 		}
@@ -594,30 +593,15 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							let videoCacheURL = quality == .hd ? linksModel.hdVideoCacheURLFor(self.selectedWWDC) : linksModel.sdVideoCacheURLFor(self.selectedWWDC)
 							
 							if fileManager.fileExists(atPath: videoCacheURL.path) {
-								if fileManager.fileExists(atPath: userVideoLinksURL.path) {
-									try fileManager.removeItem(at: userVideoLinksURL)
-								}
-								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
-									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
-								}
-
-								try fileManager.copyItem(at: videoCacheURL, to: userVideoLinksURL)
-								selectedTypes.remove(type)
+								try? fileManager.removeItem(at: videoCacheURL)
 							}
 							
 						case .pdf:
 							let userPdfLinksURL = linksModel.userPdfLinksURLFor(selectedWWDC)
 							let pdfLinksCacheURL = linksModel.pdfLinksCacheURLFor(self.selectedWWDC)
+							
 							if fileManager.fileExists(atPath: pdfLinksCacheURL.path) {
-								if fileManager.fileExists(atPath: userPdfLinksURL.path) {
-									try fileManager.removeItem(at: userPdfLinksURL)
-								}
-								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
-									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
-								}
-
-								try fileManager.copyItem(at: pdfLinksCacheURL, to: userPdfLinksURL)
-								selectedTypes.remove(type)
+								try? fileManager.removeItem(at: userPdfLinksURL)
 							}
 							
 						case .sampleCode:
@@ -626,18 +610,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							let sampleCodesLinksCacheURL = linksModel.sampleCodesLinksCacheURLFor(selectedWWDC)
 							
 							if fileManager.fileExists(atPath: sampleCodesLinksCacheURL.path) {
-								if fileManager.fileExists(atPath: userSampleCodesLinksURL.path) {
-									try fileManager.removeItem(at: userSampleCodesLinksURL)
-								}
-								else if !fileManager.fileExists(atPath: model.destinationURL!.path) {
-									try fileManager.createDirectory(atPath: model.destinationURL!.path, withIntermediateDirectories: true, attributes: nil)
-								}
-								
-								try fileManager.copyItem(at: sampleCodesLinksCacheURL, to: userSampleCodesLinksURL)
-								selectedTypes.remove(type)
+								try? fileManager.removeItem(at: userSampleCodesLinksURL)
 							}
 							
 						}
+						
 					}
 					
 				}

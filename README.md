@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="https://github.com/ssamadgh/WWDCsrt/releases" target="_blank">
-	    <img src="https://img.shields.io/badge/Version-1.6.3-brightgreen.svg?style=flat" alt="app version 1.6.3">
+	    <img src="https://img.shields.io/badge/Version-1.6.4-brightgreen.svg?style=flat" alt="app version 1.6.4">
     </a>
     <a href="https://developer.apple.com/swift/" target="_blank">
 	    <img src="https://img.shields.io/badge/Swift-4.0-orange.svg?style=flat" alt="Swift 4.0">
@@ -26,9 +26,10 @@
 
 ### Whats New: 
 
-**version 1.6.3:**
+**version 1.6.4:**
 
 - Supports WWDC 2020
+- Fixed a bug which doesn't download some of subtitles and video links correctly
 
 **version 1.6.2:**
 
