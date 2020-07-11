@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="16097"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -352,7 +352,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fzV-OB-wwG">
-                                                    <rect key="frame" x="6" y="136" width="52" height="17"/>
+                                                    <rect key="frame" x="6" y="137" width="52" height="16"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="WWDC:" id="Arn-kX-2R4">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -360,7 +360,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <comboBox verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="M6Q-Zv-3Yq">
-                                                    <rect key="frame" x="259" y="130" width="334" height="26"/>
+                                                    <rect key="frame" x="259" y="131" width="334" height="25"/>
                                                     <comboBoxCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" placeholderString="Type number of session here" drawsBackground="YES" numberOfVisibleItems="5" id="FB9-cm-dUp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -377,9 +377,9 @@
                                                 </comboBox>
                                                 <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y3e-ud-86c">
                                                     <rect key="frame" x="62" y="131" width="102" height="25"/>
-                                                    <popUpButtonCell key="cell" type="push" title="2019" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="9Eq-Vb-UNx" id="gAr-hK-jRl">
+                                                    <popUpButtonCell key="cell" type="push" title="2013" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="Hca-am-Xf4" id="gAr-hK-jRl">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="menu"/>
+                                                        <font key="font" metaFont="system"/>
                                                         <menu key="menu" id="n1s-2H-JbX">
                                                             <items>
                                                                 <menuItem title="2013" id="Hca-am-Xf4"/>
@@ -388,7 +388,8 @@
                                                                 <menuItem title="2016" id="ddq-Sk-uJN"/>
                                                                 <menuItem title="2017" id="3Mh-go-LDA"/>
                                                                 <menuItem title="2018" id="SHM-Sb-JyO"/>
-                                                                <menuItem title="2019" state="on" id="9Eq-Vb-UNx"/>
+                                                                <menuItem title="2019" id="9Eq-Vb-UNx"/>
+                                                                <menuItem title="2020" state="on" id="oq6-UZ-w2n"/>
                                                                 <menuItem title="Tech Talks" id="1yZ-EV-Gxs"/>
                                                             </items>
                                                         </menu>
@@ -398,7 +399,7 @@
                                                     </connections>
                                                 </popUpButton>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="rLA-Pd-Kos">
-                                                    <rect key="frame" x="180" y="135" width="73" height="18"/>
+                                                    <rect key="frame" x="180" y="136" width="73" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="Session:" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="QuP-ht-aZD">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -408,7 +409,7 @@
                                                     </connections>
                                                 </button>
                                                 <button translatesAutoresizingMaskIntoConstraints="NO" id="Tdh-r6-eFZ">
-                                                    <rect key="frame" x="180" y="95" width="95" height="18"/>
+                                                    <rect key="frame" x="180" y="96" width="95" height="18"/>
                                                     <buttonCell key="cell" type="radio" title="All Sessions" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Gsz-1a-xQd">
                                                         <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                         <font key="font" metaFont="system"/>
@@ -481,7 +482,7 @@
                                                         <box fixedFrame="YES" boxType="custom" cornerRadius="4" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="OTU-X9-jgZ">
                                                             <rect key="frame" x="10" y="0.0" width="106" height="38"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <view key="contentView" ambiguous="YES" id="9SM-1a-mQo">
+                                                            <view key="contentView" id="9SM-1a-mQo">
                                                                 <rect key="frame" x="1" y="1" width="104" height="36"/>
                                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                 <subviews>
@@ -538,7 +539,7 @@
                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mzO-pc-DV2">
                                                     <rect key="frame" x="20" y="100" width="558" height="21"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Paste WWDC Video link here..." drawsBackground="YES" id="wrj-F3-9iK">
-                                                        <font key="font" metaFont="cellTitle"/>
+                                                        <font key="font" metaFont="label" size="12"/>
                                                         <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
@@ -621,13 +622,13 @@ DQ
                             <textField horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tlk-iA-lGE">
                                 <rect key="frame" x="101" y="87" width="431" height="19"/>
                                 <textFieldCell key="cell" lineBreakMode="truncatingHead" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="uLM-1A-9gc">
-                                    <font key="font" metaFont="smallSystem"/>
+                                    <font key="font" metaFont="message" size="11"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q8b-Ig-8oo">
-                                <rect key="frame" x="18" y="88" width="77" height="17"/>
+                                <rect key="frame" x="18" y="89" width="77" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Destination:" id="IME-MX-NeP">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -641,7 +642,7 @@ DQ
                                 <rect key="frame" x="20" y="40" width="16" height="16"/>
                             </progressIndicator>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="y6j-Uv-YIP">
-                                <rect key="frame" x="44" y="42" width="37" height="17"/>
+                                <rect key="frame" x="44" y="42" width="37" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="XAd-t5-Ibg">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
