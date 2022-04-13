@@ -32,7 +32,7 @@ final class GetSessionsListOperation: GroupOperation {
 		
 		let sessionListURL = downloadLinksCacheFolder.appendingPathComponent("sessionList.html")
 		
-			self.getSessionsListOperation = GetHtmlSessionsListOperation(wwdcYear: wwdcYear, cacheFile: sessionListURL)
+        self.getSessionsListOperation = GetHtmlSessionsListOperation(wwdcYear: wwdcYear, cacheFile: sessionListURL)
 		
 		self.parseSessionsListOperation = ParseSessionsListOperation(for: wwdcYear, cacheFile: sessionListURL)
 
@@ -45,8 +45,8 @@ final class GetSessionsListOperation: GroupOperation {
 		
 		finishOperation.addDependency(self.parseSessionsListOperation)
 
-		
-		let operations = [self.getSessionsListOperation, self.parseSessionsListOperation, finishOperation].filter { $0 != nil } as! [Foundation.Operation]
+
+        let operations = [self.getSessionsListOperation, self.parseSessionsListOperation, finishOperation].compactMap { $0 }
 		
 		super.init(operations: operations)
 		

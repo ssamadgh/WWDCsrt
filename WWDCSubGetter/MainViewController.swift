@@ -46,7 +46,7 @@ enum WWDC: String {
 
 final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFieldDelegate, NSComboBoxCellDataSource, NSComboBoxDataSource, NSComboBoxDelegate, ProgressView {
 	
-	var isTesting: Bool = false
+    var isTesting: Bool = false
 	
     // MARK: - Enums
     
@@ -110,8 +110,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 	@IBOutlet weak var hdRadioButton: NSButton!
 	
 	@IBOutlet weak var sdRadioButton: NSButton!
-	
-//	let operationQueue = OperationQueue()
 	
 	let presenter = Presenter()
 	
@@ -210,7 +208,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		self.comboBox.stringValue = ""
 		self.toggleSession(for: self.session)
 
-
     }
     
     // MARK: Radio buttons methods
@@ -299,22 +296,16 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     }
     
     func numberOfItems(in comboBox: NSComboBox) -> Int {
-//        return self.selectedWWWDCSubtitles.count
 		return self.sessionsListArray.count
 
     }
     
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-//        return self.selectedWWWDCSubtitles[index].videoName
 		return self.sessionsListArray[index]
 
     }
     
     func comboBox(_ comboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int {
-//        let filteredSubtitles = self.selectedWWWDCSubtitles.filter { $0.videoName == string}
-//
-//        return !filteredSubtitles.isEmpty ? self.selectedWWWDCSubtitles.index(of: filteredSubtitles.first!)! : NSNotFound
-		
 		let filteredList = self.sessionsListArray.filter { $0 == string }
 		return !filteredList.isEmpty ? self.sessionsListArray.index(of: filteredList.first!)! : NSNotFound
     }
@@ -484,7 +475,9 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 						searchString = "/\(sessionNumber)"
 					}
 					else {
-						searchString = "/\(sessionNumber)/\(sessionNumber)"
+                        // before 2020: "/sessionNumber/sessionNumber",
+                        // after 2020:  "/sessionNumber"
+						searchString = "/\(sessionNumber)"
 					}
 					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(searchString) }
 					if let videoLink = hdVideoLinksArray.first {

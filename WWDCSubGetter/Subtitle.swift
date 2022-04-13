@@ -45,16 +45,20 @@ struct Subtitle: Comparable {
 	
 	/// This is the pattern we use to verify valid WWDC Video links.
 	private let pattern = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/[wdctuiorals]+\\/)(\\d+)(\\/\\w+\\/)(\\w+)(\\/)(\\w+(?:-)?\\w+)\\.m[op4][v4](?:\\?dl\\=1)?"
-	
+
+    private let pattern2020 = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/[wdctuiorals]+\\/)(\\d+)(\\/)(\\d+)(\\/\\d+\\/)([a-zA-Z0-9\\-]+\\/)([a-zA-Z0-9\\-\\_]+)\\.m[op4][v4](?:\\?dl\\=1)?"
+
+    private let pattern2021 = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/[wdctuiorals]+\\/)(\\d+)(\\/)(\\d+)(\\/\\d+\\/)([a-zA-Z0-9\\-]+\\/)(downloads\\/)([a-zA-Z0-9\\-\\_]+)\\.m[op4][v4](?:\\?dl\\=1)?"
 	
 	/// A prefix of inputed video url which used for geting m3u8 and webvtt files url
 	private let videoURLPrefix: String
-	
-	private let wwdcYear: Int
+
 	private let sessionNumber: Int
-	
+
 	var webvtts: [Webvtt] = []
-	
+
+    let wwdcYear: Int
+
 	/// The given WWDC Video download url
 	let videoURL: String
 	
@@ -78,6 +82,9 @@ struct Subtitle: Comparable {
 	
 	/// The url that used to download subtitle m3u8 file
 	var m3u8URL: URL {
+        if self.wwdcYear == 2020 {
+            return URL(string: self.videoURLPrefix + "cc/en/en.m3u8")!
+        }
 		return URL(string:self.videoURLPrefix + "subtitles/eng/prog_index.m3u8")!
 	}
 	
@@ -89,18 +96,39 @@ struct Subtitle: Comparable {
 	/// We Check validation of inputed WWDC video url and if it wasn't valid we return nil in initialization.
 	/// - parameter videoURL: WWDC video url which want to export its subtitle.
 	init?(videoURL: String) {
-		
-		if let regexGroup = videoURL.captureGroups(with: pattern), !regexGroup.isEmpty {
+		let regexGroup = videoURL.captureGroups(with: pattern)!
+        let regexGroup2020 = videoURL.captureGroups(with: pattern2020)!
+        let regexGroup2021 = videoURL.captureGroups(with: pattern2021)!
+        if !regexGroup.isEmpty || !regexGroup2020.isEmpty || !regexGroup2021.isEmpty  {
 			/*
 			If video url was valid we export some information from video url
 			like video name , wwdc year, session number,... and save them to
 			related properties.
 			*/
-			self.videoURL = regexGroup[0]
-			self.videoURLPrefix = regexGroup[1...5].joined()
-			self.videoName = regexGroup[6]
-			self.wwdcYear = Int(regexGroup[2])!
-			self.sessionNumber = Int(regexGroup[4]) ?? {
+            var localSessionNumber = ""
+            if !regexGroup.isEmpty {
+                self.videoURL = regexGroup[0]
+                self.videoURLPrefix = regexGroup[1...5].joined()
+                self.videoName = regexGroup[6]
+                self.wwdcYear = Int(regexGroup[2])!
+                localSessionNumber = regexGroup[4]
+
+            } else if !regexGroup2020.isEmpty {
+                self.videoURL = regexGroup2020[0]
+                self.videoURLPrefix = regexGroup2020[1...6].joined()
+                self.videoName = regexGroup2020[7]
+                self.wwdcYear = Int(regexGroup2020[2])!
+                localSessionNumber = regexGroup2020[4]
+
+            } else {
+                self.videoURL = regexGroup2021[0]
+                self.videoURLPrefix = regexGroup2021[1...6].joined()
+                self.videoName = regexGroup2021[8]
+                self.wwdcYear = Int(regexGroup2021[2])!
+                localSessionNumber = regexGroup2021[4]
+            }
+
+			self.sessionNumber = Int(localSessionNumber) ?? {
 				
 				/*
 				Some video links group 4 of pattern is'nt session number,
@@ -135,8 +163,10 @@ struct Subtitle: Comparable {
 	
 	/// This method gives url for download webvtt file related to given webvtt.
 	func url(for webvtt: Webvtt) -> URL {
-		let webvttFileURL = self.videoURLPrefix + "subtitles/eng/" + webvtt.name
-		return URL(string: webvttFileURL)!
+        if self.wwdcYear == 2020 {
+            return URL(string: self.videoURLPrefix + "cc/en/" + webvtt.name)!
+        }
+        return URL(string: self.videoURLPrefix + "subtitles/eng/" + webvtt.name)!
 	}
 	
 	/**
