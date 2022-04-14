@@ -29,8 +29,6 @@ struct ReachabilityCondition: OperationCondition {
         return nil
     }
     
-    
-    
     func evaluateForOperation(_ operation: Operation, completion: @escaping (OperationConditionResult) -> Void) {
         ReachabilityController.requestReachability(host) { reachable in
             if reachable {
@@ -63,7 +61,6 @@ private class ReachabilityController {
                 if ref == nil {
                     let hostString = host as NSString
                     ref = SCNetworkReachabilityCreateWithName(nil, hostString.utf8String!)
-//                    ref = SCNetworkReachabilityCreateWithName(nil, hostString.utf8String!)
                 }
                 
                 if let ref = ref {

@@ -14,7 +14,7 @@ let lastWWDC = WWDC.of2018
 
 enum WWDC: String {
 	//tech-talks
-	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks", of2018 = "2018", of2019 = "2019", of2020 = "2020"
+	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks", of2018 = "2018", of2019 = "2019", of2020 = "2020", of2021 = "2021"
 	
 	var stringValue: String {
 		switch self {
@@ -36,6 +36,8 @@ enum WWDC: String {
 			return "wwdc2019"
 		case .of2020:
 			return "wwdc2020"
+        case .of2021:
+            return "wwdc2021"
 
 		}
 	}
@@ -44,7 +46,7 @@ enum WWDC: String {
 
 final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFieldDelegate, NSComboBoxCellDataSource, NSComboBoxDataSource, NSComboBoxDelegate, ProgressView {
 	
-	var isTesting: Bool = false
+    var isTesting: Bool = false
 	
     // MARK: - Enums
     
@@ -78,7 +80,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     // MARK: - Properties
     
     @IBOutlet weak var tabView: NSTabView!
-    @IBOutlet weak  var comboBox: NSComboBox!
+    @IBOutlet weak var comboBox: NSComboBox!
     @IBOutlet weak var popUpButton: NSPopUpButton!
     @IBOutlet weak var videoLinkTextField: NSTextField!
     @IBOutlet weak var textFileViewLabel: NSTextField!
@@ -108,8 +110,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 	@IBOutlet weak var hdRadioButton: NSButton!
 	
 	@IBOutlet weak var sdRadioButton: NSButton!
-	
-//	let operationQueue = OperationQueue()
 	
 	let presenter = Presenter()
 	
@@ -208,7 +208,6 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		self.comboBox.stringValue = ""
 		self.toggleSession(for: self.session)
 
-
     }
     
     // MARK: Radio buttons methods
@@ -297,22 +296,16 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     }
     
     func numberOfItems(in comboBox: NSComboBox) -> Int {
-//        return self.selectedWWWDCSubtitles.count
 		return self.sessionsListArray.count
 
     }
     
     func comboBox(_ comboBox: NSComboBox, objectValueForItemAt index: Int) -> Any? {
-//        return self.selectedWWWDCSubtitles[index].videoName
 		return self.sessionsListArray[index]
 
     }
     
     func comboBox(_ comboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int {
-//        let filteredSubtitles = self.selectedWWWDCSubtitles.filter { $0.videoName == string}
-//
-//        return !filteredSubtitles.isEmpty ? self.selectedWWWDCSubtitles.index(of: filteredSubtitles.first!)! : NSNotFound
-		
 		let filteredList = self.sessionsListArray.filter { $0 == string }
 		return !filteredList.isEmpty ? self.sessionsListArray.index(of: filteredList.first!)! : NSNotFound
     }
@@ -482,7 +475,9 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 						searchString = "/\(sessionNumber)"
 					}
 					else {
-						searchString = "/\(sessionNumber)/\(sessionNumber)"
+                        // before 2020: "/sessionNumber/sessionNumber",
+                        // after 2020:  "/sessionNumber"
+						searchString = "/\(sessionNumber)"
 					}
 					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(searchString) }
 					if let videoLink = hdVideoLinksArray.first {

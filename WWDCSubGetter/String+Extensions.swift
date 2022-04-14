@@ -7,6 +7,7 @@
 //
 
 import CoreGraphics
+import CoreText
 import Foundation
 
 typealias RegexPattern = String

@@ -36,7 +36,6 @@ class GetHtmlSessionsListOperation: GroupOperation {
 		taskOperation.addCondition(reachabilityCondition)
 		
 		addOperation(taskOperation)
-
 	}
 	
 	func downloadFinished(_ url: URL?, response: URLResponse?, error: NSError?) {
