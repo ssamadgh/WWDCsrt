@@ -705,7 +705,7 @@
 				INFOPLIST_FILE = WWDCSubGetter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.6.4;
+				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samad.WWDC.srt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -725,7 +725,7 @@
 				INFOPLIST_FILE = WWDCSubGetter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				MARKETING_VERSION = 1.6.4;
+				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samad.WWDC.srt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

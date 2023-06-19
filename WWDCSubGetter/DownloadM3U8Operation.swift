@@ -55,7 +55,7 @@ final class DownloadM3U8Operation: GroupOperation {
                 let string = try String(contentsOf: localURL, encoding: String.Encoding.utf8)
                 // webvtt pattern before 2021
                 var subsURLArray = string.components(separatedBy: "\n").filter {$0.contains("fileSequence")}
-                if self.subtitle.wwdcYear == 2021 {
+                if self.subtitle.wwdcYear >= 2021 {
                     subsURLArray = string.components(separatedBy: "\n").filter {$0.contains("sequence")}
                 }
 

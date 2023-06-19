@@ -24,23 +24,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "05B0D8E4-78CD-427B-9B27-1AE16E638968"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WWDCSubGetter/FetchWebvttsOperation.swift"
-            timestampString = "550143256.7030751"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
-            landmarkName = "execute()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3DAD1EF8-031A-42F2-9604-92A8FA392B39"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -109,23 +92,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9E23759E-3A6F-44DF-9CA3-DC40B0269267"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
-            timestampString = "551488201.254867"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
-            landmarkName = "downloadFinished(_:response:error:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "AA7DF2E0-E937-4E37-B8B4-584A0BC54BEB"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -157,7 +123,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D719305C-179B-46C7-AFAA-F8144220957A - dff1fc07787583de"
+                  uuid = "D719305C-179B-46C7-AFAA-F8144220957A - b943d10cd0a79487"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -173,7 +139,7 @@
                   offsetFromSymbolStart = "769">
                </Location>
                <Location
-                  uuid = "D719305C-179B-46C7-AFAA-F8144220957A - 545e19e5a1014c23"
+                  uuid = "D719305C-179B-46C7-AFAA-F8144220957A - 32ec34ee09d35b7a"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -208,7 +174,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "F6494784-99C3-45F1-9827-982EDDA4B72B - 1d3049ab53eadbc6"
+                  uuid = "F6494784-99C3-45F1-9827-982EDDA4B72B - 7b8264a0fb38c9a8"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -224,7 +190,7 @@
                   offsetFromSymbolStart = "375">
                </Location>
                <Location
-                  uuid = "F6494784-99C3-45F1-9827-982EDDA4B72B - 3966982ca9e9778a"
+                  uuid = "F6494784-99C3-45F1-9827-982EDDA4B72B - 5fd4b527013b6585"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -253,8 +219,8 @@
             timestampString = "581915108.0030839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "659"
-            endingLineNumber = "659"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
             landmarkName = "getSubtitlesFromPath(path:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -270,8 +236,8 @@
             timestampString = "581915108.003134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "630"
-            endingLineNumber = "630"
+            startingLineNumber = "634"
+            endingLineNumber = "634"
             landmarkName = "downloadLinks(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -481,8 +447,8 @@
             timestampString = "581915108.003287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "188"
+            endingLineNumber = "188"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Actions>
@@ -512,7 +478,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "382E17BE-8643-4343-9555-6802C0927CC8 - dff1fc07787583de"
+                  uuid = "382E17BE-8643-4343-9555-6802C0927CC8 - b943d10cd0a79466"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -528,7 +494,7 @@
                   offsetFromSymbolStart = "356">
                </Location>
                <Location
-                  uuid = "382E17BE-8643-4343-9555-6802C0927CC8 - 7511caccab11c02"
+                  uuid = "382E17BE-8643-4343-9555-6802C0927CC8 - 61e331a762630bba"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -557,10 +523,10 @@
             timestampString = "581915108.003341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "761"
-            endingLineNumber = "761"
-            landmarkName = "configureSessionList()"
-            landmarkType = "9">
+            startingLineNumber = "765"
+            endingLineNumber = "765"
+            landmarkName = "getSessionsListForSelecteWWDC()"
+            landmarkType = "7">
             <Actions>
                <BreakpointActionProxy
                   ActionExtensionID = "Xcode.BreakpointAction.Sound">
@@ -569,6 +535,38 @@
                   </ActionContent>
                </BreakpointActionProxy>
             </Actions>
+            <Locations>
+               <Location
+                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e245a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WWDC_srt.MainViewController.getSessionsListForSelecteWWDC() -&gt; ()"
+                  moduleName = "WWDC.srt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "761"
+                  endingLineNumber = "761"
+                  offsetFromSymbolStart = "1892">
+               </Location>
+               <Location
+                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e25de"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WWDC_srt.MainViewController.getSessionsListForSelecteWWDC() -&gt; ()"
+                  moduleName = "WWDC.srt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "765"
+                  endingLineNumber = "765"
+                  offsetFromSymbolStart = "1892">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -588,7 +586,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "3965FE9E-A6C5-443B-8F6D-75553685A76F - 81e86863945a511f"
+                  uuid = "3965FE9E-A6C5-443B-8F6D-75553685A76F - a119c4ed5dc14b10"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -604,7 +602,7 @@
                   offsetFromSymbolStart = "1075">
                </Location>
                <Location
-                  uuid = "3965FE9E-A6C5-443B-8F6D-75553685A76F - 7c7f33621dece30b"
+                  uuid = "3965FE9E-A6C5-443B-8F6D-75553685A76F - 5c8e9fecd477f965"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -639,7 +637,7 @@
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "E6DB3052-BBAE-45B8-B3D0-2FCEBD9E1B77 - 311093a3e84524d9"
+                  uuid = "E6DB3052-BBAE-45B8-B3D0-2FCEBD9E1B77 - 11e13f2d21de35d1"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -655,7 +653,7 @@
                   offsetFromSymbolStart = "1075">
                </Location>
                <Location
-                  uuid = "E6DB3052-BBAE-45B8-B3D0-2FCEBD9E1B77 - b3e8dd69fd845fd5"
+                  uuid = "E6DB3052-BBAE-45B8-B3D0-2FCEBD9E1B77 - 931971e7341f4ea2"
                   shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -727,38 +725,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "31AAA354-B9D1-460F-92FE-BB2297DF5E05"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WWDCSubGetter/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "532"
-            endingLineNumber = "532"
-            landmarkName = "getSubtitles()"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "4D161944-9745-4052-8D1C-0FCB8D6F388F"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "WWDCSubGetter/MainViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "552"
-            endingLineNumber = "552"
-            landmarkName = "getSubtitleFromSession(for:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "5ADC1C9C-AF40-435C-8A1E-45AC7879515E"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -766,9 +732,57 @@
             filePath = "WWDCSubGetter/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "646"
-            endingLineNumber = "646"
-            landmarkName = "downloadLinks(for:)"
+            startingLineNumber = "650"
+            endingLineNumber = "650"
+            landmarkName = "MainViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  uuid = "5ADC1C9C-AF40-435C-8A1E-45AC7879515E - 6ff5bb47b6e4be24"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WWDC_srt.MainViewController.getSubtitlesFromPath(path: Swift.String) -&gt; Swift.Array&lt;WWDC_srt.Subtitle&gt;"
+                  moduleName = "WWDC.srt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "648"
+                  endingLineNumber = "648"
+                  offsetFromSymbolStart = "212">
+               </Location>
+               <Location
+                  uuid = "5ADC1C9C-AF40-435C-8A1E-45AC7879515E - 6ff5bb47b6e4bea0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WWDC_srt.MainViewController.getSubtitlesFromPath(path: Swift.String) -&gt; Swift.Array&lt;WWDC_srt.Subtitle&gt;"
+                  moduleName = "WWDC.srt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "652"
+                  endingLineNumber = "652"
+                  offsetFromSymbolStart = "212">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DCBA26A5-CA1C-4576-8415-E050F5F42AC6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "WWDCSubGetter/DownloadM3U8Operation.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "downloadFinished(_:response:error:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
