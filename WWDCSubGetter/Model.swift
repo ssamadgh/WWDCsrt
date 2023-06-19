@@ -17,7 +17,42 @@ typealias ID = Int
      We created a global instance of `Model`, thus we can manage our subtitles easily
      in every class and struct.
 */
-var model = Model()
+
+class SafeModel {
+    
+    var queue = DispatchQueue(label: "Model_Thread_Safe_Queue")
+    
+    private var _model = Model()
+
+    
+    var model: Model {
+        get {
+            queue.sync {
+                return self._model
+            }
+        }
+        
+        set {
+            queue.async {
+                self._model = newValue
+            }
+        }
+    }
+    
+}
+
+fileprivate var safeModel = SafeModel()
+
+var model: Model {
+    get {
+        return safeModel.model
+    }
+    
+    set {
+        safeModel.model = newValue
+    }
+}
+
 
 
 struct Model {

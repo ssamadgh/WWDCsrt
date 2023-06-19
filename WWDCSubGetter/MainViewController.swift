@@ -10,11 +10,13 @@ import Cocoa
 
 /// An enum for wwdc selection `popUpButton`
 
-let lastWWDC = WWDC.of2018
+var lastWWDC: WWDC {
+    WWDC.allCases.last ?? .of2013
+}
 
-enum WWDC: String {
-	//tech-talks
-	case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks",
+enum WWDC: String, CaseIterable {
+
+    case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks",
          of2018 = "2018", of2019 = "2019", of2020 = "2020", of2021 = "2021", of2022 = "2022", of2023 = "2023"
 	
 	var stringValue: String {
@@ -752,7 +754,8 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		
 		func configureSessionList() {
 			DispatchQueue.global().async {
-				let data = try! String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
+				guard let data = try? String(contentsOfFile:titleURL.path, encoding: String.Encoding.utf8)
+                else { return }
 				let sessionsListArray = data.components(separatedBy: "\n")
 				self.sessionsListArray = sessionsListArray
 				DispatchQueue.main.async {

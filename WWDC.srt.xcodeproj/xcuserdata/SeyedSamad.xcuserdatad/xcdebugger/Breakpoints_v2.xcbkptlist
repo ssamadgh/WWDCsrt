@@ -219,8 +219,8 @@
             timestampString = "581915108.0030839"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "663"
-            endingLineNumber = "663"
+            startingLineNumber = "665"
+            endingLineNumber = "665"
             landmarkName = "getSubtitlesFromPath(path:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -236,8 +236,8 @@
             timestampString = "581915108.003134"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "634"
-            endingLineNumber = "634"
+            startingLineNumber = "636"
+            endingLineNumber = "636"
             landmarkName = "downloadLinks(for:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -447,8 +447,8 @@
             timestampString = "581915108.003287"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
             <Actions>
@@ -523,8 +523,8 @@
             timestampString = "581915108.003341"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "765"
-            endingLineNumber = "765"
+            startingLineNumber = "768"
+            endingLineNumber = "768"
             landmarkName = "getSessionsListForSelecteWWDC()"
             landmarkType = "7">
             <Actions>
@@ -537,7 +537,7 @@
             </Actions>
             <Locations>
                <Location
-                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e245a"
+                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e2533"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -547,12 +547,27 @@
                   urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "761"
-                  endingLineNumber = "761"
+                  startingLineNumber = "768"
+                  endingLineNumber = "768"
+                  offsetFromSymbolStart = "2028">
+               </Location>
+               <Location
+                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e2533"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "WWDC_srt.MainViewController.getSessionsListForSelecteWWDC() -&gt; ()"
+                  moduleName = "WWDC.srt"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "768"
+                  endingLineNumber = "768"
                   offsetFromSymbolStart = "1892">
                </Location>
                <Location
-                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e25de"
+                  uuid = "E7C5DE7B-818C-4338-8FDE-2308DC24D829 - 1e5680f9678e2533"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -562,9 +577,9 @@
                   urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "765"
-                  endingLineNumber = "765"
-                  offsetFromSymbolStart = "1892">
+                  startingLineNumber = "768"
+                  endingLineNumber = "768"
+                  offsetFromSymbolStart = "1780">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -732,42 +747,10 @@
             filePath = "WWDCSubGetter/MainViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "650"
-            endingLineNumber = "650"
+            startingLineNumber = "652"
+            endingLineNumber = "652"
             landmarkName = "MainViewController"
             landmarkType = "3">
-            <Locations>
-               <Location
-                  uuid = "5ADC1C9C-AF40-435C-8A1E-45AC7879515E - 6ff5bb47b6e4be24"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WWDC_srt.MainViewController.getSubtitlesFromPath(path: Swift.String) -&gt; Swift.Array&lt;WWDC_srt.Subtitle&gt;"
-                  moduleName = "WWDC.srt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "648"
-                  endingLineNumber = "648"
-                  offsetFromSymbolStart = "212">
-               </Location>
-               <Location
-                  uuid = "5ADC1C9C-AF40-435C-8A1E-45AC7879515E - 6ff5bb47b6e4bea0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "WWDC_srt.MainViewController.getSubtitlesFromPath(path: Swift.String) -&gt; Swift.Array&lt;WWDC_srt.Subtitle&gt;"
-                  moduleName = "WWDC.srt"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/SeyedSamad/Documents/My_Datas/PublishedProjects/WWDCSubGetter_Backup/WWDCsrt/WWDCSubGetter/MainViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "652"
-                  endingLineNumber = "652"
-                  offsetFromSymbolStart = "212">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

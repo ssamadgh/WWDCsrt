@@ -26,6 +26,10 @@
 
 ### Whats New: 
 
+**version 1.6.5:**
+
+- Supports WWDC 2022 and WWDC 2023
+
 **version 1.6.4:**
 
 - Supports WWDC 2020

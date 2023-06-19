@@ -8,8 +8,39 @@
 
 import Foundation
 
+class SafeLinksModel {
+    
+    var queue = DispatchQueue(label: "LinkModel_Thread_Safe_Queue")
+    
+    private var _linksModel = LinksModel()
 
-var linksModel = LinksModel()
+    
+    var linksModel: LinksModel {
+        get {
+            queue.sync {
+                return self._linksModel
+            }
+        }
+        
+        set {
+            queue.async {
+                self._linksModel = newValue
+            }
+        }
+    }
+    
+}
+
+fileprivate var safeLinksModel = SafeLinksModel()
+var linksModel: LinksModel {
+    get {
+        return safeLinksModel.linksModel
+    }
+    
+    set {
+        safeLinksModel.linksModel = newValue
+    }
+}
 
 struct LinksModel {
 	var titles: [String] = []
