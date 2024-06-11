@@ -12,8 +12,8 @@ class Presenter {
 	
 	let operationQueue = OperationQueue()
 	
-	func convertToSubtitle(from url: String, type: InputType, completion: @escaping ([Subtitle]) -> Void) {
-		let convertToSubtitleOperation = ConvertToSubtitleOperation(from: url, type: type, completion: completion)
+    func convertToSubtitle(from url: String, wwdc: WWDC, type: InputType, completion: @escaping ([Subtitle]) -> Void) {
+        let convertToSubtitleOperation = ConvertToSubtitleOperation(from: url, wwdc: wwdc, type: type, completion: completion)
 		self.operationQueue.addOperation(convertToSubtitleOperation)
 	}
 	

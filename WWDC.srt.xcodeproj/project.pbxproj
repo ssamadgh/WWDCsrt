@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -54,6 +54,11 @@
 		E4E45BC11F93662400FE62CD /* WWDC2014_links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4E45BBC1F93661C00FE62CD /* WWDC2014_links.txt */; };
 		E4E45BC21F93662400FE62CD /* WWDC2015_links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4E45BBD1F93661C00FE62CD /* WWDC2015_links.txt */; };
 		E4E45BC31F93662400FE62CD /* WWDC2013_links.txt in Resources */ = {isa = PBXBuildFile; fileRef = E4E45BBE1F93661C00FE62CD /* WWDC2013_links.txt */; };
+		E4E57A5C2AB331680012BDC2 /* WWDC2021.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E57A5B2AB331680012BDC2 /* WWDC2021.swift */; };
+		E4E57A5E2AB331BF0012BDC2 /* WWDCYear.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E57A5D2AB331BF0012BDC2 /* WWDCYear.swift */; };
+		E4E57A602AB331ED0012BDC2 /* WWDC2020.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E57A5F2AB331ED0012BDC2 /* WWDC2020.swift */; };
+		E4E57A862AB394F40012BDC2 /* Webvtt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E57A852AB394F40012BDC2 /* Webvtt.swift */; };
+		E4E57A882AB407910012BDC2 /* WWDC2019.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4E57A872AB407910012BDC2 /* WWDC2019.swift */; };
 		E4F327C81F406EA80018B524 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4F327C71F406EA80018B524 /* AppDelegate.swift */; };
 		E4F327CC1F406EA80018B524 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E4F327CB1F406EA80018B524 /* Assets.xcassets */; };
 		E4F327CF1F406EA80018B524 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E4F327CD1F406EA80018B524 /* Main.storyboard */; };
@@ -121,6 +126,11 @@
 		E4E45BBC1F93661C00FE62CD /* WWDC2014_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDC2014_links.txt; sourceTree = "<group>"; };
 		E4E45BBD1F93661C00FE62CD /* WWDC2015_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDC2015_links.txt; sourceTree = "<group>"; };
 		E4E45BBE1F93661C00FE62CD /* WWDC2013_links.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = WWDC2013_links.txt; sourceTree = "<group>"; };
+		E4E57A5B2AB331680012BDC2 /* WWDC2021.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC2021.swift; sourceTree = "<group>"; };
+		E4E57A5D2AB331BF0012BDC2 /* WWDCYear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDCYear.swift; sourceTree = "<group>"; };
+		E4E57A5F2AB331ED0012BDC2 /* WWDC2020.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC2020.swift; sourceTree = "<group>"; };
+		E4E57A852AB394F40012BDC2 /* Webvtt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Webvtt.swift; sourceTree = "<group>"; };
+		E4E57A872AB407910012BDC2 /* WWDC2019.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC2019.swift; sourceTree = "<group>"; };
 		E4F327C41F406EA80018B524 /* WWDC.srt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WWDC.srt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4F327C71F406EA80018B524 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E4F327CB1F406EA80018B524 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -272,6 +282,11 @@
 				E4D6DD3D1F6C73C200EE9B83 /* Model.swift */,
 				E431A32620C7FDA0000844BF /* LinksModel.swift */,
 				E48D21A41F94E1A000AB8BBC /* Subtitle.swift */,
+				E4E57A5D2AB331BF0012BDC2 /* WWDCYear.swift */,
+				E4E57A5F2AB331ED0012BDC2 /* WWDC2020.swift */,
+				E4E57A872AB407910012BDC2 /* WWDC2019.swift */,
+				E4E57A5B2AB331680012BDC2 /* WWDC2021.swift */,
+				E4E57A852AB394F40012BDC2 /* Webvtt.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -396,20 +411,22 @@
 		E4F327BC1F406EA80018B524 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Seyed Samad Gholamzadeh";
 				TargetAttributes = {
 					E4CDBE55220BF3F800CE6A9C = {
 						CreatedOnToolsVersion = 10.1;
 						DevelopmentTeam = 2T492Q3SC8;
+						LastSwiftMigration = 1500;
 						ProvisioningStyle = Automatic;
 						TestTargetID = E4F327C31F406EA80018B524;
 					};
 					E4F327C31F406EA80018B524 = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 2T492Q3SC8;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 1500;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -476,8 +493,10 @@
 				E434C90A1F8EB29100DA9B30 /* FetchWebvttsOperation.swift in Sources */,
 				E434C8EE1F8DFBEB00DA9B30 /* Foundation.Operation+Operation.swift in Sources */,
 				E46069021F9599B70009B113 /* Array+Extensions.swift in Sources */,
+				E4E57A602AB331ED0012BDC2 /* WWDC2020.swift in Sources */,
 				E434C8F51F8DFBEB00DA9B30 /* MutuallyExclusive.swift in Sources */,
 				E434C8FC1F8DFBEB00DA9B30 /* OperationQueue.swift in Sources */,
+				E4E57A862AB394F40012BDC2 /* Webvtt.swift in Sources */,
 				E431A32320C7ECAA000844BF /* GetHtmlSessionsListOperation.swift in Sources */,
 				E48D21A51F94E1A000AB8BBC /* Subtitle.swift in Sources */,
 				E434C8F71F8DFBEB00DA9B30 /* OperationErrors.swift in Sources */,
@@ -492,9 +511,11 @@
 				E434C8D41F8DF9B900DA9B30 /* MainViewController.swift in Sources */,
 				E434C9001F8E156D00DA9B30 /* FetchSubtitilesOperation.swift in Sources */,
 				E434C8F31F8DFBEB00DA9B30 /* Operation.swift in Sources */,
+				E4E57A882AB407910012BDC2 /* WWDC2019.swift in Sources */,
 				E431A32720C7FDA0000844BF /* LinksModel.swift in Sources */,
 				E4858EC321F78B8F006EC937 /* Presenter.swift in Sources */,
 				E431A31D20C6C161000844BF /* WWDCVideosController.swift in Sources */,
+				E4E57A5C2AB331680012BDC2 /* WWDC2021.swift in Sources */,
 				E434C9081F8E8FBC00DA9B30 /* ConvertToSubtitleOperation.swift in Sources */,
 				E431A32920C80F5E000844BF /* ParseHtmlVideoPageOperation.swift in Sources */,
 				E431A32020C7E869000844BF /* GetLinksOperation.swift in Sources */,
@@ -502,6 +523,7 @@
 				E434C8FA1F8DFBEB00DA9B30 /* BlockObserver.swift in Sources */,
 				E434C8ED1F8DFBEB00DA9B30 /* NSLock+Operations.swift in Sources */,
 				E410760F1F91292400A4D4AB /* TextFileView.swift in Sources */,
+				E4E57A5E2AB331BF0012BDC2 /* WWDCYear.swift in Sources */,
 				E431A32D20C87163000844BF /* ExportLinksOperation.swift in Sources */,
 				E431A32520C7FBF0000844BF /* DownloadHtmlVideoPageOperation.swift in Sources */,
 				E4D6DD3E1F6C73C200EE9B83 /* Model.swift in Sources */,
@@ -547,16 +569,21 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2T492Q3SC8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WWDC.srtTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samad.WWDC-srtTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WWDC.srt.app/Contents/MacOS/WWDC.srt";
 			};
 			name = Debug;
@@ -571,15 +598,20 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2T492Q3SC8;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = WWDC.srtTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.samad.WWDC-srtTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WWDC.srt.app/Contents/MacOS/WWDC.srt";
 			};
 			name = Release;
@@ -610,6 +642,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -617,9 +650,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -669,6 +704,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -676,9 +712,11 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -690,7 +728,8 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -699,18 +738,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2T492Q3SC8;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WWDCSubGetter/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samad.WWDC.srt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -719,18 +764,24 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = 2T492Q3SC8;
+				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = WWDCSubGetter/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
 				MARKETING_VERSION = 1.6.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.samad.WWDC.srt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Default;
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

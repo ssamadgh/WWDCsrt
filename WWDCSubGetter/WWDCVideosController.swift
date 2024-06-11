@@ -42,17 +42,6 @@ class WWDCVideosController {
 		return sessionsListArray
 	}
 	
-	class func getGenericURLs(fromHTML: String) -> [String] {
-		let pat = "(http(?:s)?[^ ]*?)\\?dl"
-		//(http(?:s)?.*?\\.[mpz][op4di][v4afp])
-		//(http(?:s)?.*?\\.(?:mp4|m4a|mov|pdf|zip))
-		
-		let regex = try! NSRegularExpression(pattern: pat, options: [])
-		let matches = regex.matches(in: fromHTML, options: [], range: NSRange(location: 0, length: fromHTML.count))
-		
-		return []
-	}
-	
 	class func getHDorSDdURLs(fromHTML: String, format: VideoQuality) -> (String) {
 		
 		let formatValue = format == .hd ? "[hH][dD]" : "[sS][dD]"

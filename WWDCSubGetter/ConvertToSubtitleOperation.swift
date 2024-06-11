@@ -24,19 +24,21 @@ enum InputType {
 final class ConvertToSubtitleOperation: Operation {
     
     let url: String
+    let wwdc: WWDC
     let type: InputType
     var completion: (([Subtitle]) -> Void)!
 
-    init(from url: String, type: InputType) {
+    init(from url: String, wwdc: WWDC, type: InputType) {
         self.url = url
+        self.wwdc = wwdc
         self.type = type
         
         super.init()
         self.name = "ConvertToSubtitleOperation"
     }
     
-    convenience init(from url: String, type: InputType, completion: @escaping ([Subtitle]) -> Void) {
-        self.init(from: url, type: type)
+    convenience init(from url: String, wwdc: WWDC, type: InputType, completion: @escaping ([Subtitle]) -> Void) {
+        self.init(from: url, wwdc: wwdc, type: type)
         self.completion = completion
 
     }
@@ -54,14 +56,14 @@ final class ConvertToSubtitleOperation: Operation {
             let pattern = ".m[op4][v4]"
             if url.contains(pattern) {
                 let url = self.url.trimmingCharacters(in: .whitespacesAndNewlines)
-                model.createSubtitle(with: url)
+                model.createSubtitle(with: url, wwdc: wwdc)
             }
             
         case .textFile:
             let array = convertTextFileToArray()
             for url in array {
                 let url = url.trimmingCharacters(in: .whitespacesAndNewlines)
-                model.createSubtitle(with: url)
+                model.createSubtitle(with: url, wwdc: wwdc)
             }
         }
         

@@ -59,6 +59,11 @@ struct LinksModel {
 		self.titles.removeAll()
 	}
 	
+    var cacheDestinationURL: URL {
+        let destinationURL = cachesFolder.appendingPathComponent("com.samad.WWDC.srt", isDirectory: true)
+        return destinationURL
+    }
+    
 	func cacheDestinationURFor(_ wwdcYear: WWDC) -> URL {
 		let destinationURL = cachesFolder.appendingPathComponent("com.samad.WWDC.srt/\(wwdcYear.stringValue)/", isDirectory: true)
 		return destinationURL

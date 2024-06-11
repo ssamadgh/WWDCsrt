@@ -11,37 +11,131 @@ This file contains `Webvtt` and `Subtitle` structs.
 
 import Foundation
 
-// MARK: -  Webvtt
-
-/**
-A struct for saving webvtt file informations, such as `name` and `number`
-of it in m3u8 file and the webvtt file content(after converting to srt stadard content).
-*/
-struct Webvtt: Comparable {
-	
-	/// number of webvtt file in m3u8 file
-	var number: Int
-	
-	/// content of webvtt file
-	var content: String
-	
-	/// name of webvtt file in m3u8 file
-	var name: String
-}
-
-// We need to just compare `Webvtt`s according to their number, to sort in `Subtitle` webvtts array.
-func <(lhs: Webvtt, rhs: Webvtt) -> Bool {
-	return lhs.number < rhs.number
-}
-
-func ==(lhs: Webvtt, rhs: Webvtt) -> Bool {
-	return lhs.number == rhs.number
-}
-
 // MARK: -  Subtitle
 
-/// A struct for saving and managing video link informations.
 struct Subtitle: Comparable {
+    
+    var id: ID {
+        wwdcYear.id
+    }
+    
+    var m3u8URL: URL {
+        wwdcYear.m3u8URL
+    }
+    
+    var videoURL: String {
+        wwdcYear.videoURL
+    }
+    
+    var webvtts: [Webvtt] {
+        wwdcYear.webvtts
+    }
+    
+    var wwdcYear: WWDCYear
+    
+    init?(videoURL: String, wwdc: WWDC) {
+        
+        let wwdcYear: WWDCYear? = {
+           
+            switch wwdc {
+            case .of2024, .of2023, .of2022, .of2021:
+                return WWDC2021(videoURL: videoURL)
+            case .of2020:
+                return WWDC2020(videoURL: videoURL)
+            default:
+                return WWDC2019(videoURL: videoURL)
+            }
+        }()
+        
+        guard let wwdcYear = wwdcYear else {
+            return nil
+        }
+        
+        self.wwdcYear = wwdcYear
+    }
+    
+    mutating func updateWebvtts(with url: URL) throws {
+        try wwdcYear.updateWebvtts(with: url)
+    }
+    
+    func url(for webvtt: Webvtt) -> URL {
+        wwdcYear.url(for: webvtt)
+    }
+    
+    /**
+    This method exports srt files with ordering webvtts in webvtts array
+    and gatherin their contents in a single srt file.
+    */
+    func exportSrtFile() {
+        var subString: String = ""
+        let array = self.wwdcYear.webvtts.sorted()
+        for Webvtt in array {
+            subString += Webvtt.content
+        }
+        
+        // Some of webvtts have some joint content. we need found this joint parts and delete them.
+        var subArray = subString.components(separatedBy: "\n\n")
+        subArray = subArray.removingDuplicates()
+        subString = subArray.filter{!$0.isEmpty}.map{"\(subArray.firstIndex(of: $0)! + 1)\n" + $0 }.joined(separator: "\n\n\n") + "\n\n"
+        self.saveSrtFileAtDestination(with: subString)
+        SubtitlesProgress.changed()
+    }
+    
+    /**
+    This method saves given text as content of exported subtitle in a srt files.
+    
+    - note: We save two srt file in local url for both SD and HD versions of WWDC video.
+    
+    - parameter text: The content that should save in srt file.
+    */
+    private func saveSrtFileAtDestination(with text: String) {
+        
+        if let dir = model.destinationURL {
+            
+            //writing
+            do {
+                let folderPathHD = "/WWDC_\(self.wwdcYear.year)_Video_Subtitles/HD/"
+                let folderPathSD = "/WWDC_\(self.wwdcYear.year)_Video_Subtitles/SD/"
+                let hdPath = dir.path + folderPathHD
+                let sdPath = dir.path + folderPathSD
+                try FileManager.default.createDirectory(atPath: hdPath, withIntermediateDirectories: true, attributes: nil)
+                try FileManager.default.createDirectory(atPath: sdPath, withIntermediateDirectories: true, attributes: nil)
+                
+                var path = dir.appendingPathComponent(folderPathHD + wwdcYear.subtitleNameForHD)
+                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                
+                path = dir.appendingPathComponent(folderPathSD + wwdcYear.subtitleNameForSD)
+                try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
+                
+            }
+            catch {/* error handling here */
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    mutating func appendWebvtt(_ webvtt: Webvtt) {
+        wwdcYear.webvtts.append(webvtt)
+    }
+    
+    mutating func clearWebvtts() {
+        wwdcYear.webvtts.removeAll()
+    }
+    
+}
+
+// We need to just compare `Subtitle`s according to their id, to sort in `Subtitle` webvtts array.
+func <(lhs: Subtitle, rhs: Subtitle) -> Bool {
+    return lhs.wwdcYear.id < rhs.wwdcYear.id
+}
+
+func ==(lhs: Subtitle, rhs: Subtitle) -> Bool {
+    return lhs.wwdcYear.id == rhs.wwdcYear.id
+}
+
+
+/// A struct for saving and managing video link informations.
+struct OldSubtitle: Comparable {
 	
 	/// This is the pattern we use to verify valid WWDC Video links.
 	private let pattern = "(http(?:s)?:\\/\\/devstreaming[\\S\\w]*.apple.com\\/videos\\/[wdctuiorals]+\\/)(\\d+)(\\/\\w+\\/)(\\w+)(\\/)(\\w+(?:-)?\\w+)\\.m[op4][v4](?:\\?dl\\=1)?"
@@ -169,68 +263,15 @@ struct Subtitle: Comparable {
         return URL(string: self.videoURLPrefix + "subtitles/eng/" + webvtt.name)!
 	}
 	
-	/**
-	This method exports srt files with ordering webvtts in webvtts array
-	and gatherin their contents in a single srt file.
-	*/
-	func exportSrtFile() {
-		var subString: String = ""
-		let array = self.webvtts.sorted()
-		for Webvtt in array {
-			subString += Webvtt.content
-		}
-		
-		// Some of webvtts have some joint content. we need found this joint parts and delete them.
-		var subArray = subString.components(separatedBy: "\n\n")
-		subArray = subArray.removingDuplicates()
-		subString = subArray.filter{!$0.isEmpty}.map{"\(subArray.index(of: $0)! + 1)\n" + $0 }.joined(separator: "\n\n\n") + "\n\n"
-		self.saveSrtFileAtDestination(with: subString)
-		SubtitlesProgress.changed()
-	}
-	
-	/**
-	This method saves given text as content of exported subtitle in a srt files.
-	
-	- note: We save two srt file in local url for both SD and HD versions of WWDC video.
-	
-	- parameter text: The content that should save in srt file.
-	*/
-	private func saveSrtFileAtDestination(with text: String) {
-		
-		if let dir = model.destinationURL {
-			
-			//writing
-			do {
-				let folderPathHD = "/WWDC_\(self.wwdcYear)_Video_Subtitles/HD/"
-				let folderPathSD = "/WWDC_\(self.wwdcYear)_Video_Subtitles/SD/"
-				try FileManager.default.createDirectory(atPath: dir.path + folderPathHD, withIntermediateDirectories: true, attributes: nil)
-				try FileManager.default.createDirectory(atPath: dir.path + folderPathSD, withIntermediateDirectories: true, attributes: nil)
-				
-				var path = dir.appendingPathComponent(folderPathHD + subtitleNameForHD)
-				try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-				
-				path = dir.appendingPathComponent(folderPathSD + subtitleNameForSD)
-				try text.write(to: path, atomically: false, encoding: String.Encoding.utf8)
-				
-			}
-			catch {/* error handling here */
-				print(error.localizedDescription)
-			}
-		}
-	}
-	
-	func getARandomNumber() -> Int {
-		return Int(arc4random_uniform(100))*Int(arc4random_uniform(101))
-	}
 	
 }
 
 
 // We need to just compare `Subtitle`s according to their id, to sort in `Subtitle` webvtts array.
-func <(lhs: Subtitle, rhs: Subtitle) -> Bool {
+func <(lhs: OldSubtitle, rhs: OldSubtitle) -> Bool {
 	return lhs.id < rhs.id
 }
 
-func ==(lhs: Subtitle, rhs: Subtitle) -> Bool {
+func ==(lhs: OldSubtitle, rhs: OldSubtitle) -> Bool {
 	return lhs.id == rhs.id
 }

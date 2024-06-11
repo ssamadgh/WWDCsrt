@@ -54,7 +54,7 @@ final class TextFileView: NSView {
         var canAccept = false
         
         //2.
-        let pasteBoard = draggingInfo.draggingPasteboard()
+        let pasteBoard = draggingInfo.draggingPasteboard
         
         //3.
         if pasteBoard.canReadObject(forClasses: [NSURL.self], options: filteringOptions) {
@@ -100,7 +100,7 @@ final class TextFileView: NSView {
     override func performDragOperation(_ draggingInfo: NSDraggingInfo) -> Bool {
         
         isReceivingDrag = false
-        let pasteBoard = draggingInfo.draggingPasteboard()
+        let pasteBoard = draggingInfo.draggingPasteboard
         
         if let urls = pasteBoard.readObjects(forClasses: [NSURL.self], options:filteringOptions) as? [URL], urls.count > 0 {
             delegate?.droppedTextFileURL(urls.first!)

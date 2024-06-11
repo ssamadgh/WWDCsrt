@@ -16,8 +16,10 @@ var lastWWDC: WWDC {
 
 enum WWDC: String, CaseIterable {
 
-    case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017", techTalks = "Tech Talks",
-         of2018 = "2018", of2019 = "2019", of2020 = "2020", of2021 = "2021", of2022 = "2022", of2023 = "2023"
+    case of2013 = "2013", of2014 = "2014", of2015 = "2015", of2016 = "2016", of2017 = "2017",
+         techTalks = "Tech Talks",
+         of2018 = "2018", of2019 = "2019", of2020 = "2020", of2021 = "2021", of2022 = "2022",
+         of2023 = "2023", of2024 = "2024"
 	
 	var stringValue: String {
 		switch self {
@@ -45,6 +47,8 @@ enum WWDC: String, CaseIterable {
             return "wwdc2022"
         case .of2023:
             return "wwdc2023"
+        case .of2024:
+            return "wwdc2024"
 		}
 	}
 		
@@ -196,6 +200,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 			NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: cachesFolder.path)
 		}
 
+        // Clearing cache
+        let cacheURL = linksModel.cacheDestinationURL
+        if FileManager.default.fileExists(atPath: cacheURL.path) {
+            try? FileManager.default.removeItem(at: cacheURL)
+        }
 		
     }
     
@@ -313,12 +322,13 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     
     func comboBox(_ comboBox: NSComboBox, indexOfItemWithStringValue string: String) -> Int {
 		let filteredList = self.sessionsListArray.filter { $0 == string }
-		return !filteredList.isEmpty ? self.sessionsListArray.index(of: filteredList.first!)! : NSNotFound
+        return !filteredList.isEmpty ? self.sessionsListArray.firstIndex(of: filteredList.first!)! : NSNotFound
     }
     
     // MARK: - Video Link tabView methods
     
-	override func controlTextDidChange(_ obj: Notification) {
+    
+	func controlTextDidChange(_ obj: Notification) {
 		
 		guard (obj.object as? NSTextField) === self.videoLinkTextField,
 			!self.videoLinkTextField.stringValue.isEmpty else {
@@ -326,7 +336,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				return
 		}
 		
-		self.presenter.convertToSubtitle(from: self.videoLinkTextField.stringValue, type: .videoLink) { (subtitles) in
+        self.presenter.convertToSubtitle(from: self.videoLinkTextField.stringValue, wwdc: selectedWWDC, type: .videoLink) { (subtitles) in
 			if !subtitles.isEmpty {
 				self.videoLinkSubtitle = subtitles.first
 				DispatchQueue.main.async {
@@ -351,7 +361,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         
         self.draggedTextFileURL = url
         
-        self.presenter.convertToSubtitle(from: url.path, type: .textFile) { (subtitles) in
+        self.presenter.convertToSubtitle(from: url.path, wwdc: selectedWWDC, type: .textFile) { (subtitles) in
             if !subtitles.isEmpty {
                 self.draggedTextFileSubtitles = subtitles
                 
@@ -487,7 +497,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 					}
 					let hdVideoLinksArray = data.components(separatedBy: "\n").filter { $0.contains(searchString) }
 					if let videoLink = hdVideoLinksArray.first {
-						if let subtitle = Subtitle(videoURL: videoLink) {
+                        if let subtitle = Subtitle(videoURL: videoLink, wwdc: wwdc) {
 							model.update(subtitle)
 						}
 					}
@@ -521,7 +531,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				let hdVideoURL = linksModel.hdVideoCacheURLFor(wwdc)
 				
 				func getSubtitles() {
-					self.presenter.convertToSubtitle(from: hdVideoURL.path, type: .textFile) { (subtitles) in
+                    self.presenter.convertToSubtitle(from: hdVideoURL.path, wwdc: wwdc, type: .textFile) { (subtitles) in
 						
 						DispatchQueue.main.async {
 							model.update(subtitles)
@@ -578,7 +588,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 				break
 			case .allSessions:
 				
-				var selectedTypes = Set(types)
+                let selectedTypes = Set(types)
 
 				let fileManager = FileManager.default
 
@@ -587,14 +597,11 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 					for type in selectedTypes {
 						switch type {
 						case let .video(quality):
-							let userHdVideoLinksURL = linksModel.userHdVideoLinksURLFor(selectedWWDC)
-							let userSdVideoLinksURL = linksModel.userSdVideoLinksURLFor(selectedWWDC)
 
-							let userVideoLinksURL = quality == .hd ? userHdVideoLinksURL : userSdVideoLinksURL
 							let videoCacheURL = quality == .hd ? linksModel.hdVideoCacheURLFor(self.selectedWWDC) : linksModel.sdVideoCacheURLFor(self.selectedWWDC)
 							
 							if fileManager.fileExists(atPath: videoCacheURL.path) {
-								try? fileManager.removeItem(at: videoCacheURL)
+								try fileManager.removeItem(at: videoCacheURL)
 							}
 							
 						case .pdf:
@@ -602,7 +609,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							let pdfLinksCacheURL = linksModel.pdfLinksCacheURLFor(self.selectedWWDC)
 							
 							if fileManager.fileExists(atPath: pdfLinksCacheURL.path) {
-								try? fileManager.removeItem(at: userPdfLinksURL)
+								try fileManager.removeItem(at: userPdfLinksURL)
 							}
 							
 						case .sampleCode:
@@ -611,7 +618,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 							let sampleCodesLinksCacheURL = linksModel.sampleCodesLinksCacheURLFor(selectedWWDC)
 							
 							if fileManager.fileExists(atPath: sampleCodesLinksCacheURL.path) {
-								try? fileManager.removeItem(at: userSampleCodesLinksURL)
+								try fileManager.removeItem(at: userSampleCodesLinksURL)
 							}
 							
 						}
@@ -654,7 +661,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 		var subtitles: [Subtitle] = []
 		let semaphore = DispatchSemaphore.init(value: 0)
 		
-		self.presenter.convertToSubtitle(from: path, type: .textFile) { (subs) in
+        self.presenter.convertToSubtitle(from: path, wwdc: selectedWWDC, type: .textFile) { (subs) in
 			subtitles = subs
 //			model.update(subtitles)
 			semaphore.signal()
@@ -679,7 +686,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
     
     func startGetSubtitleOperation(for wwdc: WWDC) {
         self.getButton.isEnabled = false
-        self.getButtonStatusLabel.textColor = .black
+        self.getButtonStatusLabel.textColor = .labelColor
         self.getButtonStatusLabel.stringValue = "downloading Subtitles 0 of \(model.allSubtitles().count)"
         
         self.progressIndicator.minValue = 0
@@ -732,7 +739,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
         let fileName = "WWDC\(selectedYear)_links"
 		guard let path = Bundle.main.path(forResource: fileName, ofType: "txt") else { return }
         
-        self.presenter.convertToSubtitle(from: path, type: .textFile) { (subtitles) in
+        self.presenter.convertToSubtitle(from: path, wwdc: self.selectedWWDC, type: .textFile) { (subtitles) in
             self.wwdcVideosSubtitlesDic[selectedWWDC] = subtitles
             
             DispatchQueue.main.async {
@@ -844,7 +851,7 @@ final class MainViewController: NSViewController, TextFileViewDelegate, NSTextFi
 
 
 extension NSColor {
-    open class var moss: NSColor {
+    public class var moss: NSColor {
         return NSColor(deviceRed: 0, green: 144/255, blue: 81/255, alpha: 1)
     }
 }

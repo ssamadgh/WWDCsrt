@@ -52,15 +52,7 @@ final class DownloadM3U8Operation: GroupOperation {
                  which are the original subtitle files.
                  We download and convert this webvtt files in a single srt file later.
                 */
-                let string = try String(contentsOf: localURL, encoding: String.Encoding.utf8)
-                // webvtt pattern before 2021
-                var subsURLArray = string.components(separatedBy: "\n").filter {$0.contains("fileSequence")}
-                if self.subtitle.wwdcYear >= 2021 {
-                    subsURLArray = string.components(separatedBy: "\n").filter {$0.contains("sequence")}
-                }
-
-                let webvttArray = subsURLArray.map {Webvtt(number: subsURLArray.index(of: $0)!, content: "", name: $0)}
-                self.subtitle.webvtts = webvttArray
+                try self.subtitle.updateWebvtts(with: localURL)
                 model.update(self.subtitle)
             }
             catch let error as NSError {

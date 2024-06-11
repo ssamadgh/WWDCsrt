@@ -72,8 +72,8 @@ struct Model {
          This method create a subtitle object with given `videoURL`
          and if it wasn't nil, adds it to the model.
     */
-    mutating func createSubtitle(with videoURL: String) {
-        if let subtitle = Subtitle(videoURL: videoURL) {
+    mutating func createSubtitle(with videoURL: String, wwdc: WWDC) {
+        if let subtitle = Subtitle(videoURL: videoURL, wwdc: wwdc) {
             self.videosSub[subtitle.id] = subtitle
         }
     }
@@ -102,12 +102,12 @@ struct Model {
     
     /// This method adds given webvtt to the specified model subtitle
     mutating func add(_ webvtt: Webvtt, to subtitle: Subtitle) {
-        self.videosSub[subtitle.id]?.webvtts.append(webvtt)
+        self.videosSub[subtitle.id]?.appendWebvtt(webvtt)
     }
     
     /// This method clears webvttArray of the specified model subtitle
     mutating func clearWebvttArray(of subtitle: Subtitle) {
-        self.videosSub[subtitle.id]?.webvtts = []
+        self.videosSub[subtitle.id]?.clearWebvtts()
     }
     
     /// This method clears all subtitles saved in the model.

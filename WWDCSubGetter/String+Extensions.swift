@@ -13,7 +13,7 @@ import Foundation
 typealias RegexPattern = String
 
 extension CGColor {
-    open static var yellow: CGColor {
+    public static var yellow: CGColor {
         return CGColor(red: 1, green: 1, blue: 0, alpha: 1)
     }
 }
@@ -41,7 +41,7 @@ extension String {
         
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [])
-            let range = NSMakeRange(0, self.characters.count)
+            let range = NSMakeRange(0, self.count)
             let matches = regex.matches(in: self, options: [], range: range)
             let attributedText = NSMutableAttributedString(string: self)
             
@@ -52,7 +52,7 @@ extension String {
                 #else
                     // OSX code
                     //                    attributedText.ad
-                    attributedText.addAttribute(NSAttributedStringKey(rawValue: kCTBackgroundColorAttributeName as String), value: CGColor.yellow, range: match.range)
+                attributedText.addAttribute(NSAttributedString.Key(rawValue: kCTBackgroundColorAttributeName as String), value: CGColor.yellow, range: match.range)
                     
                 #endif
                 
@@ -69,7 +69,7 @@ extension String {
         
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [])
-            let range = NSMakeRange(0, self.characters.count)
+            let range = NSMakeRange(0, self.count)
             let matches = regex.matches(in: self, options: [], range: range)
             return matches.map {
                 let range = $0.range
@@ -109,7 +109,7 @@ extension String {
         
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [])
-            let range = NSMakeRange(0, self.characters.count)
+            let range = NSMakeRange(0, self.count)
             return regex.firstMatch(in: self, options: [], range: range) != nil
         } catch let error as NSError {
             print(error.localizedDescription)
@@ -121,7 +121,7 @@ extension String {
         
         do {
             let regex = try NSRegularExpression(pattern: pattern, options: [])
-            let range = NSMakeRange(0, self.characters.count)
+            let range = NSMakeRange(0, self.count)
             return regex.stringByReplacingMatches(in: self, options: [], range: range, withTemplate: replacementString)
         } catch let error as NSError {
             print(error.localizedDescription)
